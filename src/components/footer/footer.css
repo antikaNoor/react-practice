@@ -1,0 +1,56 @@
+/* * {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+.footer-container {
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 50px;
+    padding: 40px 90px;
+} */
+
+footer {
+    margin-top: 40px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Adjust link styles */
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Style for the footer heading */
+footer h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+/* Style for the footer links */
+footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer li {
+    margin-bottom: 8px;
+}
+
+/* Add some spacing for social icons */
+.social-icons {
+    margin-top: 10px;
+    color: white;
+    margin: 0 10px;
+    font-size: 24px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
