@@ -1,6 +1,6 @@
-import './header.scss'
+// import './header.css'
 
-const Header = () => {
+const Login = () => {
     return (
         <div className="header-container">
             <div>Home</div>
@@ -11,4 +11,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default Login

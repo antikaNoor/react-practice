@@ -1,24 +1,31 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Header from './components/header/header'
-import Button from './components/button/button'
+// import Button from './components/button/button'
 import Card from './components/card/card'
-import './App.css'
+import './App.scss'
 import Footer from './components/footer/footer'
+import MyName from './components/myName'
+import SearchBar from './components/searchBar/searchBar'
 
 function App() {
   console.log("this is app")
 
   const [fetchedData, setFetchedData] = useState(null)
 
-  const onDataFetched = (data) => {
-    setFetchedData(data)
-  }
+  useEffect(() => {
+    // Fetch data from API
+    fetch('http://localhost:8000/book/get-all-books')
+      .then((response) => response.json())
+      .then((result) => setFetchedData(result))
+      .catch((error) => console.error(error))
+  }, [])
+
   return (
     <div className='container'>
       <Header />
-      <h1>View all product</h1>
-      <p>Click the button to view all data</p>
-      <Button onDataFetched={onDataFetched} />
+      <MyName />
+      <SearchBar />
+      {/* <Button onDataFetched={onDataFetched} /> */}
       {fetchedData && <Card data={fetchedData} />}
       <Footer />
     </div>

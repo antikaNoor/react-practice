@@ -1,21 +1,25 @@
-import Button from '../button/button'
-import './card.css'
+import './card.scss'
 
 const Card = ({ data }) => {
+    const styling = {
+        lowStock: {
+            color: "red"
+        }
+    }
     return (
         <div className="card-container">
-            <ul className="list-container">
-                {data.products.map((product, index) => {
-                    return <li key={index} className='list-items'>
-                        <img src={product.images[0]}></img>
-                        <p><b>{product.title}</b></p>
-                        <p>Price:  {product.price}</p>
-                        <p>Rating:  {product.rating}</p>
-                        <p>Stock:  {product.stock}</p>
-                        <a href={product.thumbnail} target='_blank'>View Image</a>
-                    </li>
+            <div className="list-container">
+                {data.data.books.map((book, index) => {
+                    return <div key={index} className='list-items'>
+                        {/* <img src={product.images[0]}></img> */}
+                        <p><b>{book.title}</b></p>
+                        <p>Author:  {book.author}</p>
+                        <p>Price:  {book.price}</p>
+                        {book.stock > 20 ? <p>Stock:  {book.stock}</p> : <p style={styling.lowStock}>Stock:  {book.stock}</p>}
+                        {/* <a href={product.thumbnail} target='_blank'>View Image</a> */}
+                    </div>
                 })}
-            </ul>
+            </div>
         </div>
     )
 }
