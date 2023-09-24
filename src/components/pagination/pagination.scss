@@ -1,0 +1,9 @@
+@import '../colors.scss';
+
+.page-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}

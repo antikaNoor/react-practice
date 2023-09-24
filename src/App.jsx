@@ -50,11 +50,11 @@ function App() {
       </div>
       {/* <Button onDataFetched={onDataFetched} /> */}
       {fetchedData && <Card data={fetchedData} />}
-      {/* <Pagination
+      <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={(page) => fetchBooks(page)} // Update currentPage when a page is clicked
-      /> */}
+      />
       <Footer />
     </div>
   )

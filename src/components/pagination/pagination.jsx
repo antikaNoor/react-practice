@@ -6,7 +6,7 @@ import { faCircleArrowLeft, faCircleArrowRight } from '@fortawesome/free-solid-s
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 
     return (
-        <div>
+        <div className='page-container'>
             <FontAwesomeIcon
                 icon={faCircleArrowLeft}
                 onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
