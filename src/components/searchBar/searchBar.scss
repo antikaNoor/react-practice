@@ -1,0 +1,22 @@
+@import '../colors.scss';
+
+.searchbar-container {
+    width: 20%;
+    padding: 10px 5px;
+    border: 1px solid $darkColor;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+.searchbar-container:focus {
+    border: 2px solid $lightColor;
+}
+.search-input {
+    border: none;
+    outline: none;
+}
+
+.search-input[type="text"] {
+    width: 100%;
+}
