@@ -1,0 +1,22 @@
+.form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 70px;
+
+    .input-field {
+        background-color: white;
+        padding: 10px 5px;
+        border-radius: 20px;
+        margin: 0 auto;
+        border: none;
+        outline: none;
+    }
+
+    .btn-style {
+        padding: 10px 20px;
+        border-radius: 10px;
+        border: none;
+        margin-left: 20px;
+    }
+}
