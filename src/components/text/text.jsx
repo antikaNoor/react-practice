@@ -1,11 +1,10 @@
 import React from 'react';
 import Text2 from './text2'
 
-
-function Text({ title }) {
+function Text() {
     return (
         <div>
-            <Text2 title={title} />
+            <Text2 />
         </div>
     )
 }
