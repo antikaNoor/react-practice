@@ -4,9 +4,7 @@ const Header = () => {
     return (
         <div className="header-container">
             <div>Home</div>
-            <div>Sign in</div>
-            <div>Sign up</div>
-            <div>About us</div>
+            <div>Books</div>
         </div>
     )
 }

@@ -151,7 +151,7 @@
 
 "@fortawesome/fontawesome-common-types@6.4.2":
   version "6.4.2"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.4.2.tgz#1766039cad33f8ad87f9467b98e0d18fbc8f01c5"
+  resolved "https://registry.npmjs.org/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.4.2.tgz"
   integrity sha512-1DgP7f+XQIJbLFCTX1V2QnxVmpLdKdzzo2k8EmvDOePfchaIGQ9eCHj2up3/jNEbZuBqel5OxiaOJf37TWauRA==
 
 "@fortawesome/fontawesome-free@^6.4.2":
@@ -161,21 +161,21 @@
 
 "@fortawesome/fontawesome-svg-core@^6.4.2":
   version "6.4.2"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-6.4.2.tgz#37f4507d5ec645c8b50df6db14eced32a6f9be09"
+  resolved "https://registry.npmjs.org/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-6.4.2.tgz"
   integrity sha512-gjYDSKv3TrM2sLTOKBc5rH9ckje8Wrwgx1CxAPbN5N3Fm4prfi7NsJVWd1jklp7i5uSCVwhZS5qlhMXqLrpAIg==
   dependencies:
     "@fortawesome/fontawesome-common-types" "6.4.2"
 
 "@fortawesome/free-solid-svg-icons@^6.4.2":
   version "6.4.2"
-  resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-6.4.2.tgz#33a02c4cb6aa28abea7bc082a9626b7922099df4"
+  resolved "https://registry.npmjs.org/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-6.4.2.tgz"
   integrity sha512-sYwXurXUEQS32fZz9hVCUUv/xu49PEJEyUOsA51l6PU/qVgfbTb2glsTEaJngVVT8VqBATRIdh7XVgV1JF1LkA==
   dependencies:
     "@fortawesome/fontawesome-common-types" "6.4.2"
 
 "@fortawesome/react-fontawesome@^0.2.0":
   version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@fortawesome/react-fontawesome/-/react-fontawesome-0.2.0.tgz#d90dd8a9211830b4e3c08e94b63a0ba7291ddcf4"
+  resolved "https://registry.npmjs.org/@fortawesome/react-fontawesome/-/react-fontawesome-0.2.0.tgz"
   integrity sha512-uHg75Rb/XORTtVt7OS9WoK8uM276Ufi7gCzshVWkUJbHhh3svsUUeqXerrM96Wm7fRiDzfKRwSoahhMIkGAYHw==
   dependencies:
     prop-types "^15.8.1"
@@ -293,6 +293,11 @@
   resolved "https://registry.npmjs.org/@swc/types/-/types-0.1.5.tgz"
   integrity sha512-myfUej5naTBWnqOCc/MdVOLVjXUXtIA+NpDrDBKJtLLg2shUjBu3cZmB/85RyitKc55+lUUyl7oRfLOvkr2hsw==
 
+"@types/lodash@^4.14.105":
+  version "4.14.199"
+  resolved "https://registry.npmjs.org/@types/lodash/-/lodash-4.14.199.tgz"
+  integrity sha512-Vrjz5N5Ia4SEzWWgIVwnHNEnb1UE1XMkvY5DGXrAeOGE9imk0hgTHh5GyDjLDJi9OTCn9oo9dXH1uToK1VRfrg==
+
 "@types/prop-types@*":
   version "15.7.6"
   resolved "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.6.tgz"
@@ -309,6 +314,15 @@
   version "18.2.22"
   resolved "https://registry.npmjs.org/@types/react/-/react-18.2.22.tgz"
   integrity sha512-60fLTOLqzarLED2O3UQImc/lsNRgG0jE/a1mPW9KjMemY0LMITWEsbS4VvZ4p6rorEHd5YKxxmMKSDK505GHpA==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/scheduler" "*"
+    csstype "^3.0.2"
+
+"@types/react@^16.0.40":
+  version "16.14.47"
+  resolved "https://registry.npmjs.org/@types/react/-/react-16.14.47.tgz"
+  integrity sha512-m0EmmY73mbQegA+aqo0+O/hHU9iTi+hNYotJ3cM4sLFox8NqZv3XVXQhhqpd3YH6YC7h+YIyJFd36O5KlaJLCA==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -1543,6 +1557,14 @@ react-is@^16.13.1:
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
+react-rating@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.npmjs.org/react-rating/-/react-rating-2.0.5.tgz"
+  integrity sha512-uldxgLCe5bzqGX7V+7/bPgQQj2Kok6eiMgTMxjKOhfhnQkFLDlc4TjMlp7gaJFAHWdbiOnqpiShI7z8as6oWtg==
+  dependencies:
+    "@types/lodash" "^4.14.105"
+    "@types/react" "^16.0.40"
+
 react@^18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
@@ -1639,7 +1661,7 @@ safe-regex-test@^1.0.0:
 
 sass@^1.68.0:
   version "1.68.0"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.68.0.tgz#0034b0cc9a50248b7d1702ac166fd25990023669"
+  resolved "https://registry.npmjs.org/sass/-/sass-1.68.0.tgz"
   integrity sha512-Lmj9lM/fef0nQswm1J2HJcEsBUba4wgNx2fea6yJHODREoMFnwRpZydBnX/RjyXw2REIwdkbqE4hrTo4qfDBUA==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"

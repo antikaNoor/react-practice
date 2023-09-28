@@ -1,22 +1,10 @@
 import { useState, useEffect } from 'react'
-import './button.css'
-const Button = ({ onDataFetched }) => {
-    const [data, setData] = useState(null)
+import './button.scss'
+const Button = ({ value, onClick, className }) => {
 
-    // useEffect(() => {
-    //     // Fetch data from API
-    //     fetch('https://dummyjson.com/products')
-    //         .then((response) => response.json())
-    //         .then((result) => setData(result))
-    //         .catch((error) => console.error(error))
-    // }, [])
-
-    const handleButtonClick = () => {
-        onDataFetched(data)
-    }
     return (
-        <div>
-            <button className='style-button' onClick={handleButtonClick}>Click here!</button>
+        <div className='button-container'>
+            <button className={className} onClick={onClick}>{value}</button>
         </div>
     )
 }
