@@ -3,22 +3,22 @@
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: $lightColor; 
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: $medColor; 
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #c3c3c3; 
-  }
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: $lightColor;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: $medColor;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #c3c3c3;
+}
 
 .bookModal-container {
     position: fixed;
