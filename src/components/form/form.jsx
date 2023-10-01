@@ -1,16 +1,17 @@
 import './form.scss'
-const Form = () => {
 
+const Form = ({ className, label, type, name, value, placeholder, onChange }) => {
     return (
-        <div className="form-container">
-            <form
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    alert("Message submitted!");
-                }}
-            >
-                <input className="input-field" type="text" />
-                <button type="submit" className="btn-style">Submit</button>
+        <div className={className}>
+            <form className='form'>
+                <label className='form-label'>{label}</label>
+                <input className='form-input'
+                    type={type}
+                    name={name}
+                    value={value}
+                    placeholder={placeholder}
+                    onChange={onChange} />
+                {/* <button type="submit" className="btn-style">Submit</button> */}
             </form>
         </div>
     )

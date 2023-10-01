@@ -1,9 +1,18 @@
 @import '../colors.scss';
 
-.style-button {
-    background-color: $medColor;
+.btn-style {
+    background-color: $darkColor;
     color: $lightColor;
-    padding: 10px 20px;
+    font-size: 16px;
+    padding: 5px 20px;
     border: none;
-    border-radius: 10px;
+    margin-top: 5px;
+    text-align: center;
+    margin-top: 15px;
+    border-radius: 2px;
+}
+
+.btn-style:hover {
+    transform: scale(1.05);
+    cursor: pointer;
 }

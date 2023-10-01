@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react'
 import './button.scss'
-const Button = ({ value, onClick, className }) => {
+
+const Button = ({ type, value, onClick }) => {
 
     return (
         <div className='button-container'>
-            <button className={className} onClick={onClick}>{value}</button>
+            <button className='btn-style'
+                type={type}
+                onClick={onClick}>
+                {value}
+            </button>
         </div>
     )
 }

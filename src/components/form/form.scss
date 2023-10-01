@@ -1,22 +1,24 @@
+@import '../colors.scss';
+
 .form-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 20px 70px;
+    display: grid;
 
-    .input-field {
-        background-color: white;
-        padding: 10px 5px;
-        border-radius: 20px;
-        margin: 0 auto;
-        border: none;
-        outline: none;
-    }
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
 
-    .btn-style {
-        padding: 10px 20px;
-        border-radius: 10px;
-        border: none;
-        margin-left: 20px;
+        .form-label {
+            margin-right: 5px;
+            color: $darkColor;
+        }
+
+        .form-input {
+            background-color: $medColor;
+            padding: 8px 25px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+        }
     }
 }

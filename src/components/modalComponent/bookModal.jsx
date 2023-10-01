@@ -28,21 +28,18 @@ export default function BookModal({ updateModal, relatedBook }) {
                     <div className='info-container'>
                         <p className='title'><b>{relatedBook.title}</b></p>
                         <p className='author'>{relatedBook.author}</p>
-                        {/* {relatedBook.rating && <p>Rating: {relatedBook.rating}</p>} */}
                         {relatedBook.rating && <div className="star-container">{stars}</div>}
                         <p className='genre'>{genre_}</p>
-                        <p className='description'>{relatedBook.description}</p>
-                        {/* <p>Price: {relatedBook.price}</p> */}
-                        {/* {relatedBook.stock > 20 ? <p>Stock:  {relatedBook.stock}</p> : <p style={styling.infoStyle}>Stock:  {relatedBook.stock}</p>} */}
+                        <p className='description'>{relatedBook.description} {relatedBook.description}</p>
                     </div>
-                    <div className='button-container'>
-                    <Button
-                        value={addToCart}
-                        onClick={(e) => {
-                            alert("Successfully added to cart!")
-                        }}
-                        className='btn-style' />
-                    </div>
+                    {/* <div className='button-container'>
+                        <Button
+                            value={addToCart}
+                            onClick={(e) => {
+                                alert("Successfully added to cart!")
+                            }}
+                            className='btn-style' />
+                    </div> */}
                 </div>
             </div>
         </div>
