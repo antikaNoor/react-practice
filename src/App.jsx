@@ -1,4 +1,4 @@
-import EditData from "./components/editData/editData";
+// import EditData from "./components/editData/editData";
 import FetchData from "./components/fetchData/fetchData";
 import PostData from "./components/postData/postData";
 

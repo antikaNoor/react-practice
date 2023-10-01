@@ -3,8 +3,9 @@ import './bookModal.scss'
 import Form from '../form/form'
 import Button from '../button/button'
 
-function EditModal({ editFromData, editBookModal, title, author, genre, description, pages, price, stock, branches, image, onEditChangeHandler, onEditSubmitHandler }) {
-    // const { editFormData, onEditChangeHandler, onEditSubmitHandler } = useBookHook()
+function EditModal({ editBookModal, title, author, genre,
+    description, pages, price, stock, branches, image,
+    onEditChangeHandler, onEditSubmitHandler }) {
     return (
         <div className='bookModal-container'>
             <div className='bookModal-item'>

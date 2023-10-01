@@ -1,13 +1,4 @@
 import React, { useState } from 'react'
-import Header from '../header/header'
-import Card from '../card/card'
-// import '../fetchData/fetchData.scss'
-import Footer from '../footer/footer'
-import SearchBar from '../searchBar/searchBar'
-import Pagination from '../pagination/pagination'
-import BookModal from '../modalComponent/bookModal'
-import Dropdown from '../dropdown/dropdown'
-// import useBookHook from '../hooks/useBookHook'
 import EditModal from '../modalComponent/editModal'
 
 function EditData({ title, author, genre, description, pages, price, stock, branches, image, editFormData, onEditChangeHandler, onEditSubmitHandler }) {

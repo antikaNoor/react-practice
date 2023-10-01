@@ -61,16 +61,46 @@ const Card = ({ data, updateModal, setRelatedBook }) => {
                             })
                             .then((data) => {
                                 alert("Book Edited Successfully!")
-                                console.log('Book edite successfully:', data);
+                                console.log('Book edited successfully:', data);
                             })
                             .catch((error) => {
                                 console.error('Error editing book:', error);
                             });
                     };
-                    const onSubmitHandler = (e) => {
+                    const onEditSubmitHandler = (e) => {
                         e.preventDefault();
                         handleEditBook(editFormData); // Call the handleAddBook function from your custom hook
                     };
+
+                    // DELETE
+                    const handleDeleteBook = () => {
+                        fetch(`http://localhost:8000/book/delete-book/${book._id}`, {
+                            method: 'DELETE',
+                            // headers: {
+                            //     'Content-Type': 'application/json',
+                            // },
+                            // body: JSON.stringify(editFormData),
+                        })
+                            .then((response) => {
+                                if (!response.ok) {
+                                    alert("Something went wrong.")
+                                    throw new Error(`HTTP error! status: ${response.status}`);
+                                }
+                                response.json()
+                            })
+                            .then((data) => {
+                                alert("Book Deleted Successfully!")
+                                console.log('Book deleted successfully:', data);
+                            })
+                            .catch((error) => {
+                                console.error('Error deleting book:', error);
+                            });
+                    };
+                    const onDeleteSubmitHandler = (e) => {
+                        e.preventDefault();
+                        handleDeleteBook(); // Call the handleAddBook function from your custom hook
+                    };
+
                     return <div key={index} className='list-items'>
                         <div className='image-container'>
                             <img src={book.image}></img>
@@ -87,19 +117,20 @@ const Card = ({ data, updateModal, setRelatedBook }) => {
                                     updateModal();
                                 }} />
                             <div className='edit-delete-btn-container'>
-                                <DeleteData />
-                                <EditData title={book.title}
-                                    author={book.author}
-                                    genre={book.genre}
-                                    description={book.description}
-                                    pages={book.pages}
-                                    price={book.price}
-                                    stock={book.stock}
-                                    branches={book.branch}
-                                    image={book.image}
+                                <DeleteData onDeleteSubmitHandler={onDeleteSubmitHandler} />
+
+                                <EditData title={editFormData.title}
+                                    author={editFormData.author}
+                                    genre={editFormData.genre}
+                                    description={editFormData.description}
+                                    pages={editFormData.pages}
+                                    price={editFormData.price}
+                                    stock={editFormData.stock}
+                                    branches={editFormData.branch}
+                                    image={editFormData.image}
                                     editFormData={editFormData}
                                     onEditChangeHandler={onEditChangeHandler}
-                                    onEditSubmitHandler={onSubmitHandler}
+                                    onEditSubmitHandler={onEditSubmitHandler}
                                 />
                             </div>
                         </div>
