@@ -3,7 +3,6 @@ import useBookHook from '../hooks/useBookHook';
 import Button from '../button/button'
 import './postData.scss'
 import { useForm, Controller } from "react-hook-form"
-import axiosInstance from '../../../utils/axiosInstance';
 
 function PostData() {
 
@@ -14,46 +13,24 @@ function PostData() {
         getValues,
     } = useForm();
 
-    const { formData } = useBookHook()
-    const handleAddBook = (formData) => {
-        // Make a POST request to your API endpoint
-        axiosInstance
-            .post('/add-book', formData)
-            .then((response) => {
-                if (response.status !== 200) {
-                    alert("Something went wrong.")
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.data
-            })
-            .then((data) => {
-                alert("Book Added Successfully!")
-                console.log('Book added successfully:', data);
-            })
-            .catch((error) => {
-                alert('Error adding book:', error)
-                console.error('Error adding book:', error);
-            });
-    };
-
     const onSubmitHandler = () => {
         console.log("Form is submitted ");
         console.log("The title ", getValues("title"));
-        console.log("The title ", getValues("author"));
-        console.log("The title ", getValues("genre"));
-        console.log("The title ", getValues("description"));
-        console.log("The title ", getValues("price"));
-        console.log("The title ", getValues("stock"));
-        // handleAddBook(formData); // Call the handleAddBook function from your custom hook
+        console.log("The author ", getValues("author"));
+        console.log("The genre ", getValues("genre"));
+        console.log("The description ", getValues("description"));
+        console.log("The price ", getValues("price"));
+        console.log("The stock ", getValues("stock"));
+        console.log("The branch ", getValues("branch"));
+        console.log("The image ", getValues("image"));
     };
-
 
     return (
         <div className='add-book-container'>
             <h1 className='add-book-header'>Add a New Book</h1>
             <form onSubmit={handleSubmit(onSubmitHandler)}>
                 <div className='form-container'>
-                    <div>
+                    <div className='form-items'>
                         <h4>Title</h4>
                         <Controller
                             name="title"
@@ -68,6 +45,10 @@ function PostData() {
                                     value: 100,
                                     message: "Maximum length must be 100",
                                 },
+                                pattern: {
+                                    value: /^[^\s]+$/,
+                                    message: "Title must not contain numbers or spaces",
+                                },
                             }}
                             render={({ field }) => (
                                 <input
@@ -80,7 +61,7 @@ function PostData() {
                         {errors.title && <h5>{errors.title.message}</h5>}
                     </div>
 
-                    <div>
+                    <div className='form-items'>
                         <h4>Author</h4>
                         <Controller
                             name="author"
@@ -95,6 +76,10 @@ function PostData() {
                                     value: 100,
                                     message: "Maximum length must be 100",
                                 },
+                                pattern: {
+                                    value: /^[^\d\s]+$/,
+                                    message: "Author must not contain numbers or spaces",
+                                },
                             }}
                             render={({ field }) => (
                                 <input
@@ -107,24 +92,11 @@ function PostData() {
                         {errors.author && <h5>{errors.author.message}</h5>}
                     </div>
 
-
-
-                    <div>
+                    <div className='form-items'>
                         <h4>Genre</h4>
                         <Controller
                             name="genre"
                             control={control}
-                            // rules={{
-                            //     // required: "Genre name is required",
-                            //     minLength: {
-                            //         value: 6,
-                            //         message: "Minimum length must be 5",
-                            //     },
-                            //     maxLength: {
-                            //         value: 100,
-                            //         message: "Maximum length must be 100",
-                            //     },
-                            // }}
                             render={({ field }) => (
                                 <input
                                     placeholder="Enter genre"
@@ -136,25 +108,14 @@ function PostData() {
                         {errors.genre && <h5>{errors.genre.message}</h5>}
                     </div>
 
-                    <div>
+                    <div className='form-items'>
                         <h4>Description</h4>
                         <Controller
                             name="description"
                             control={control}
-                            // rules={{
-                            //     required: "Author name is required",
-                            //     minLength: {
-                            //         value: 6,
-                            //         message: "Minimum length must be 5",
-                            //     },
-                            //     maxLength: {
-                            //         value: 100,
-                            //         message: "Maximum length must be 100",
-                            //     },
-                            // }}
                             render={({ field }) => (
                                 <input
-                                    placeholder="Enter author"
+                                    placeholder="Enter description"
                                     {...field}
                                     style={{ border: errors.description ? "1px solid red" : "" }}
                                 />
@@ -163,17 +124,22 @@ function PostData() {
                         {errors.description && <h5>{errors.description.message}</h5>}
                     </div>
 
-                    <div>
+                    <div className='form-items'>
                         <h4>Price</h4>
                         <Controller
                             name="price"
                             control={control}
                             rules={{
                                 required: "Price is required",
+
+                                pattern: {
+                                    value: /^[1-9][0-9]*$/,
+                                    message: "Price must be a non-negative integer",
+                                },
                             }}
                             render={({ field }) => (
                                 <input
-                                    placeholder="Enter author"
+                                    placeholder="Enter price"
                                     {...field}
                                     style={{ border: errors.price ? "1px solid red" : "" }}
                                 />
@@ -181,23 +147,81 @@ function PostData() {
                         />
                         {errors.price && <h5>{errors.price.message}</h5>}
                     </div>
-                    <div>
+                    <div className='form-items'>
                         <h4>Stock</h4>
                         <Controller
                             name="stock"
                             control={control}
                             rules={{
                                 required: "stock is required",
+                                pattern: {
+                                    value: /^[1-9][0-9]*$/,
+                                    message: "Stock must be a non-negative integer",
+                                },
                             }}
                             render={({ field }) => (
                                 <input
-                                    placeholder="Enter author"
+                                    placeholder="Enter stock"
                                     {...field}
                                     style={{ border: errors.stock ? "1px solid red" : "" }}
                                 />
                             )}
                         />
                         {errors.stock && <h5>{errors.stock.message}</h5>}
+                    </div>
+
+                    <div className='form-items'>
+                        <h4>Pages</h4>
+                        <Controller
+                            name="pages"
+                            control={control}
+                            rules={{
+                                pattern: {
+                                    value: /^[1-9][0-9]*$/,
+                                    message: "Pages must be a non-negative integer",
+                                },
+                            }}
+                            render={({ field }) => (
+                                <input
+                                    placeholder="Enter pages"
+                                    {...field}
+                                    style={{ border: errors.pages ? "1px solid red" : "" }}
+                                />
+                            )}
+                        />
+                        {errors.pages && <h5>{errors.pages.message}</h5>}
+                    </div>
+
+                    <div className='form-items'>
+                        <h4>Branch</h4>
+                        <Controller
+                            name="branch"
+                            control={control}
+                            render={({ field }) => (
+                                <input
+                                    placeholder="Enter branch"
+                                    {...field}
+                                    style={{ border: errors.branch ? "1px solid red" : "" }}
+                                />
+                            )}
+                        />
+                        {errors.branch && <h5>{errors.branch.message}</h5>}
+                    </div>
+
+                    <div className='form-items'>
+                        <h4>Image URL</h4>
+                        <Controller
+                            name="image"
+                            control={control}
+                            render={({ field }) => (
+                                <input
+                                    placeholder="Enter image"
+                                    {...field}
+                                    style={{ border: errors.image ? "1px solid red" : "" }}
+                                />
+                            )}
+                        />
+                        {errors.image && <h5>{errors.image.message}</h5>}
                     </div>
                     {/* <Form className='form-items'
                     label='Title'

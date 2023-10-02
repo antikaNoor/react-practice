@@ -53,7 +53,6 @@ const useBookHook = () => {
             .then((data) => {
                 // Check if there are no books found
                 if (data.data.totalRecords === 0) {
-                    console.log("lalal")
                     setNoBooksFound(true);
                 } else {
                     setNoBooksFound(false);
@@ -77,7 +76,7 @@ const useBookHook = () => {
         const timeOutFunc = setTimeout(() => {
             console.log("changed")
             fetchBooks(currentPage)
-        }, 1000);
+        }, 2000);
 
         return () => clearTimeout(timeOutFunc);
     }, [currentPage, searchQuery, selectedSortOption, selectedOrderOption]);
@@ -97,6 +96,38 @@ const useBookHook = () => {
         image: ''
     })
 
+    const handleAddBook = (formData) => {
+        // Make a POST request to your API endpoint
+        axiosInstance
+            .post('/add-book', formData)
+            .then((response) => {
+                if (response.status !== 200) {
+                    alert("Something went wrong.")
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.data
+            })
+            .then((data) => {
+                alert("Book Added Successfully!")
+                console.log('Book added successfully:', data);
+            })
+            .catch((error) => {
+                alert('Error adding book:', error)
+                console.error('Error adding book:', error);
+            });
+    };
+
+    // const onSubmitHandler = () => {
+    //     console.log("Form is submitted ");
+    //     console.log("The title ", getValues("title"));
+    //     console.log("The title ", getValues("author"));
+    //     console.log("The title ", getValues("genre"));
+    //     console.log("The title ", getValues("description"));
+    //     console.log("The title ", getValues("price"));
+    //     console.log("The title ", getValues("stock"));
+    //     handleAddBook(formData);
+    // };
+
     const onChangeHandler = (e) => {
         // getting name and value pair from frontend
         const { name, value } = e.target
@@ -104,10 +135,9 @@ const useBookHook = () => {
         setFormData({ ...formData, [name]: value })
     }
 
-
-
-
-
+    const refetchBooks = () => {
+        fetchBooks(currentPage);
+    };
 
     return {
         // for fetching
@@ -117,7 +147,7 @@ const useBookHook = () => {
         sortOptionLabels, orderOptionLabels, handleSortChange, handleOrderChange,
         orderOptions, sortOptions, selectedSortOption, selectedOrderOption,
         // for adding book
-        formData, onChangeHandler
+        formData, onChangeHandler, refetchBooks
     }
 }
 
