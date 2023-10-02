@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
+import axiosInstance from '../../../utils/axiosInstance'
+// import axios from 'axios'
 
 const useBookHook = () => {
     /* FUNCTIONALITY FOR FETCHING ALL BOOKS */
 
     //fetch data from api
     const [fetchedData, setFetchedData] = useState(null)
+    const [noBooksFound, setNoBooksFound] = useState(false);
 
     //pagination
     const [currentPage, setCurrentPage] = useState(1)
@@ -44,19 +47,38 @@ const useBookHook = () => {
 
     const fetchBooks = (page) => {
         // Fetch data from API
-        fetch(`http://localhost:8000/book/get-all-books?page=${page}&limit=6&sortParam=${selectedSortOption}&sortOrder=${selectedOrderOption}&search=${searchQuery}`)
-            .then((response) => response.json())
-            .then((result) => {
-                setTotalPages(Math.ceil(result.data.totalRecords / 6));
+        axiosInstance
+            .get(`/get-all-books?page=${page}&limit=6&sortParam=${selectedSortOption}&sortOrder=${selectedOrderOption}&search=${searchQuery}`)
+            .then((response) => response.data)
+            .then((data) => {
+                // Check if there are no books found
+                if (data.data.totalRecords === 0) {
+                    setNoBooksFound(true);
+                } else {
+                    setNoBooksFound(false);
+                }
+                setTotalPages(Math.ceil(data.data.totalRecords / 6));
                 setCurrentPage(page);
-                setFetchedData(result)
+                setFetchedData(data)
             })
-            .catch((error) => console.error(error))
+            .catch((error) => {
+                if (axios.isAxiosError(error)) {
+                    // Handle AxiosError here, e.g., show a user-friendly error message.
+                    console.error("Axios Error:", error);
+                } else {
+                    // Handle other errors (network error, timeout, etc.) here.
+                    console.error("Other Error:", error);
+                }
+            })
     }
 
     useEffect(() => {
-        console.log("changed")
-        fetchBooks(currentPage)
+        const timeOutFunc = setTimeout(() => {
+            console.log("changed")
+            fetchBooks(currentPage)
+        }, 2000);
+
+        return () => clearTimeout(timeOutFunc);
     }, [currentPage, searchQuery, selectedSortOption, selectedOrderOption]);
 
     /* FUNCTIONALITY FOR ADDING BOOKS */
@@ -74,91 +96,58 @@ const useBookHook = () => {
         image: ''
     })
 
+    const handleAddBook = (formData) => {
+        // Make a POST request to your API endpoint
+        axiosInstance
+            .post('/add-book', formData)
+            .then((response) => {
+                if (response.status !== 200) {
+                    alert("Something went wrong.")
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.data
+            })
+            .then((data) => {
+                alert("Book Added Successfully!")
+                console.log('Book added successfully:', data);
+            })
+            .catch((error) => {
+                alert('Error adding book:', error)
+                console.error('Error adding book:', error);
+            });
+    };
+
+    // const onSubmitHandler = () => {
+    //     console.log("Form is submitted ");
+    //     console.log("The title ", getValues("title"));
+    //     console.log("The title ", getValues("author"));
+    //     console.log("The title ", getValues("genre"));
+    //     console.log("The title ", getValues("description"));
+    //     console.log("The title ", getValues("price"));
+    //     console.log("The title ", getValues("stock"));
+    //     handleAddBook(formData);
+    // };
+
     const onChangeHandler = (e) => {
         // getting name and value pair from frontend
         const { name, value } = e.target
         // setting the name and value in the formdata object 
         setFormData({ ...formData, [name]: value })
     }
-    
-    const handleAddBook = (formData) => {
-        // Make a POST request to your API endpoint
-        fetch('http://localhost:8000/book/add-book', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    alert("Something went wrong.")
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                response.json()
-            })
-            .then((data) => {
-                alert("Book Added Successfully!")
-                console.log('Book added successfully:', data);
-            })
-            .catch((error) => {
-                console.error('Error adding book:', error);
-            });
-    };
 
-    const onSubmitHandler = (e) => {
-        e.preventDefault();
-        handleAddBook(formData); // Call the handleAddBook function from your custom hook
-    };
-
-    /* FUNCTIONALITY FOR EDITING BOOKS */
-
-    const onEditChangeHandler = (e) => {
-        // getting name and value pair from frontend
-        const { name, value } = e.target
-        // setting the name and value in the formdata object 
-        setFormData({ ...formData, [name]: value })
-    }
-    
-    const handleEditBook = (EditFormData) => {
-        // Make a POST request to your API endpoint
-        fetch('http://localhost:8000/book/add-book', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    alert("Something went wrong.")
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                response.json()
-            })
-            .then((data) => {
-                alert("Book Added Successfully!")
-                console.log('Book added successfully:', data);
-            })
-            .catch((error) => {
-                console.error('Error adding book:', error);
-            });
-    };
-
-    const onEditSubmitHandler = (e) => {
-        e.preventDefault();
-        handleAddBook(formData); // Call the handleAddBook function from your custom hook
+    const refetchBooks = () => {
+        fetchBooks(currentPage);
     };
 
     return {
         // for fetching
-        fetchedData, fetchBooks,
+        noBooksFound, fetchedData, fetchBooks,
         currentPage, totalPages,
         searchQuery, handleSearchQuery,
         sortOptionLabels, orderOptionLabels, handleSortChange, handleOrderChange,
         orderOptions, sortOptions, selectedSortOption, selectedOrderOption,
         // for adding book
-        formData, onChangeHandler, onSubmitHandler
+        formData, onChangeHandler, refetchBooks
     }
 }
 
