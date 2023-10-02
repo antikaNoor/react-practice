@@ -3,6 +3,7 @@ import useBookHook from '../hooks/useBookHook';
 import Button from '../button/button'
 import './postData.scss'
 import { useForm, Controller } from "react-hook-form"
+import axiosInstance from '../../../utils/axiosInstance';
 
 function PostData() {
 
@@ -13,11 +14,37 @@ function PostData() {
         getValues,
     } = useForm();
 
-    const { onSubmitHandler } = useBookHook()
+    const { formData } = useBookHook()
+    const handleAddBook = (formData) => {
+        // Make a POST request to your API endpoint
+        axiosInstance
+            .post('/add-book', formData)
+            .then((response) => {
+                if (response.status !== 200) {
+                    alert("Something went wrong.")
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.data
+            })
+            .then((data) => {
+                alert("Book Added Successfully!")
+                console.log('Book added successfully:', data);
+            })
+            .catch((error) => {
+                alert('Error adding book:', error)
+                console.error('Error adding book:', error);
+            });
+    };
 
-    const handlerOnSubmit = () => {
+    const onSubmitHandler = () => {
         console.log("Form is submitted ");
         console.log("The title ", getValues("title"));
+        console.log("The title ", getValues("author"));
+        console.log("The title ", getValues("genre"));
+        console.log("The title ", getValues("description"));
+        console.log("The title ", getValues("price"));
+        console.log("The title ", getValues("stock"));
+        // handleAddBook(formData); // Call the handleAddBook function from your custom hook
     };
 
 
@@ -133,7 +160,44 @@ function PostData() {
                                 />
                             )}
                         />
-                        {errors.author && <h5>{errors.author.message}</h5>}
+                        {errors.description && <h5>{errors.description.message}</h5>}
+                    </div>
+
+                    <div>
+                        <h4>Price</h4>
+                        <Controller
+                            name="price"
+                            control={control}
+                            rules={{
+                                required: "Price is required",
+                            }}
+                            render={({ field }) => (
+                                <input
+                                    placeholder="Enter author"
+                                    {...field}
+                                    style={{ border: errors.price ? "1px solid red" : "" }}
+                                />
+                            )}
+                        />
+                        {errors.price && <h5>{errors.price.message}</h5>}
+                    </div>
+                    <div>
+                        <h4>Stock</h4>
+                        <Controller
+                            name="stock"
+                            control={control}
+                            rules={{
+                                required: "stock is required",
+                            }}
+                            render={({ field }) => (
+                                <input
+                                    placeholder="Enter author"
+                                    {...field}
+                                    style={{ border: errors.stock ? "1px solid red" : "" }}
+                                />
+                            )}
+                        />
+                        {errors.stock && <h5>{errors.stock.message}</h5>}
                     </div>
                     {/* <Form className='form-items'
                     label='Title'

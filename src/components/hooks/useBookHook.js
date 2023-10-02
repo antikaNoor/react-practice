@@ -104,31 +104,10 @@ const useBookHook = () => {
         setFormData({ ...formData, [name]: value })
     }
 
-    const handleAddBook = (formData) => {
-        // Make a POST request to your API endpoint
-        axiosInstance
-            .post('/add-book', formData)
-            .then((response) => {
-                if (response.status !== 200) {
-                    alert("Something went wrong.")
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.data
-            })
-            .then((data) => {
-                alert("Book Added Successfully!")
-                console.log('Book added successfully:', data);
-            })
-            .catch((error) => {
-                alert('Error adding book:', error)
-                console.error('Error adding book:', error);
-            });
-    };
 
-    const onSubmitHandler = (e) => {
-        // e.preventDefault();
-        handleAddBook(formData); // Call the handleAddBook function from your custom hook
-    };
+
+
+
 
     return {
         // for fetching
@@ -138,7 +117,7 @@ const useBookHook = () => {
         sortOptionLabels, orderOptionLabels, handleSortChange, handleOrderChange,
         orderOptions, sortOptions, selectedSortOption, selectedOrderOption,
         // for adding book
-        formData, onChangeHandler, onSubmitHandler
+        formData, onChangeHandler
     }
 }
 
