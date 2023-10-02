@@ -2,7 +2,9 @@ import './card.scss'
 import Button from '../button/button'
 import DeleteData from '../deleteData/deleteData'
 import EditData from '../editData/editData'
+import SetInitialData from '../editData/setInititalData'
 import { useState } from 'react'
+import axiosInstance from '../../../utils/axiosInstance'
 
 const Card = ({ data, updateModal, setRelatedBook }) => {
     const viewButtonValue = "View"
@@ -25,68 +27,17 @@ const Card = ({ data, updateModal, setRelatedBook }) => {
                             stars.push(<i className="fa-regular fa-star" key={i}></i>);
                         }
                     }
-                    //set the form data for edit
-                    const [editFormData, setEditFormData] = useState({
-                        title: book.title,
-                        author: book.author,
-                        genre: book.genre,
-                        description: book.description,
-                        pages: book.pages,
-                        price: book.price,
-                        stock: book.stock,
-                        branch: book.branch,
-                        image: book.image
-                    })
-                    const onEditChangeHandler = (e) => {
-                        // getting name and value pair from frontend
-                        const { name, value } = e.target
-                        // setting the name and value in the formdata object 
-                        setEditFormData({ ...editFormData, [name]: value })
-                    }
-                    const handleEditBook = (editFormData) => {
-                        // Make a POST request to your API endpoint
-                        fetch(`http://localhost:8000/book/edit-book/${book._id}`, {
-                            method: 'PATCH',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(editFormData),
-                        })
-                            .then((response) => {
-                                if (!response.ok) {
-                                    alert("Something went wrong.")
-                                    throw new Error(`HTTP error! status: ${response.status}`);
-                                }
-                                response.json()
-                            })
-                            .then((data) => {
-                                alert("Book Edited Successfully!")
-                                console.log('Book edited successfully:', data);
-                            })
-                            .catch((error) => {
-                                console.error('Error editing book:', error);
-                            });
-                    };
-                    const onEditSubmitHandler = (e) => {
-                        e.preventDefault();
-                        handleEditBook(editFormData); // Call the handleAddBook function from your custom hook
-                    };
 
                     // DELETE
                     const handleDeleteBook = () => {
-                        fetch(`http://localhost:8000/book/delete-book/${book._id}`, {
-                            method: 'DELETE',
-                            // headers: {
-                            //     'Content-Type': 'application/json',
-                            // },
-                            // body: JSON.stringify(editFormData),
-                        })
+                        axiosInstance
+                            .delete(`/delete-book/${book._id}`)
                             .then((response) => {
-                                if (!response.ok) {
+                                if (response.status !== 200) {
                                     alert("Something went wrong.")
                                     throw new Error(`HTTP error! status: ${response.status}`);
                                 }
-                                response.json()
+                                return response.data
                             })
                             .then((data) => {
                                 alert("Book Deleted Successfully!")
@@ -119,19 +70,16 @@ const Card = ({ data, updateModal, setRelatedBook }) => {
                             <div className='edit-delete-btn-container'>
                                 <DeleteData onDeleteSubmitHandler={onDeleteSubmitHandler} />
 
-                                <EditData title={editFormData.title}
-                                    author={editFormData.author}
-                                    genre={editFormData.genre}
-                                    description={editFormData.description}
-                                    pages={editFormData.pages}
-                                    price={editFormData.price}
-                                    stock={editFormData.stock}
-                                    branches={editFormData.branch}
-                                    image={editFormData.image}
-                                    editFormData={editFormData}
-                                    onEditChangeHandler={onEditChangeHandler}
-                                    onEditSubmitHandler={onEditSubmitHandler}
-                                />
+                                <SetInitialData bookId={book._id}
+                                    title={book.title}
+                                    author={book.author}
+                                    genre={book.genre}
+                                    description={book.description}
+                                    pages={book.pages}
+                                    price={book.price}
+                                    stock={book.stock}
+                                    branch={book.branch}
+                                    image={book.image} />
                             </div>
                         </div>
                     </div>
