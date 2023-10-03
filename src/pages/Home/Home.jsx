@@ -4,8 +4,11 @@ import Header from '../../components/header/header'
 // import { Form } from 'react-router-dom'
 import Form from '../../components/form/form'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function Home() {
+  const navigate = useNavigate()
+
   return (
     <>
       <div className="bg-img">
@@ -15,10 +18,11 @@ function Home() {
           </div>
           <div className="welcome">
             <h1 className="heading">Once Upon A Time</h1>
-            <p className="heading-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-            <button className="btn">
-              <Link to='/fetch'>Explore</Link>
+            <p className="heading-text">Dive into the realm of books!</p>
+            <button className="btn" onClick={() => {
+              navigate('/fetch')
+            }}>Explore
+              {/* <Link className='link' to='/fetch'>Explore</Link> */}
             </button>
           </div>
         </div>

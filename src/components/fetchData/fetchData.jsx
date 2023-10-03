@@ -6,6 +6,7 @@ import Pagination from '../pagination/pagination'
 import BookModal from '../modalComponent/bookModal'
 import Dropdown from '../dropdown/dropdown'
 import useBookHook from '../hooks/useBookHook'
+import Header2 from '../header/header2'
 
 function FetchData() {
     const { noBooksFound, fetchedData, currentPage, totalPages, fetchBooks, searchQuery, handleSearchQuery, sortOptionLabels, orderOptionLabels,
@@ -26,6 +27,7 @@ function FetchData() {
 
     return (
         <div className='container'>
+            <Header2 />
             {/* modal */}
             {showBookModal && <BookModal updateModal={updateModal} relatedBook={relatedBook} />}
             {/* searching */}

@@ -76,7 +76,7 @@ const useBookHook = () => {
         const timeOutFunc = setTimeout(() => {
             console.log("changed")
             fetchBooks(currentPage)
-        }, 2000);
+        }, 500);
 
         return () => clearTimeout(timeOutFunc);
     }, [currentPage, searchQuery, selectedSortOption, selectedOrderOption]);
@@ -118,13 +118,6 @@ const useBookHook = () => {
     };
 
     // const onSubmitHandler = () => {
-    //     console.log("Form is submitted ");
-    //     console.log("The title ", getValues("title"));
-    //     console.log("The title ", getValues("author"));
-    //     console.log("The title ", getValues("genre"));
-    //     console.log("The title ", getValues("description"));
-    //     console.log("The title ", getValues("price"));
-    //     console.log("The title ", getValues("stock"));
     //     handleAddBook(formData);
     // };
 

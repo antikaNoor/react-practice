@@ -1,24 +1,20 @@
 import './header.scss'
 import { Link } from 'react-router-dom'
 
-const Header = () => {
-    // const loginData = {
-    //     username: "Antika",
-    //     token: "sdfghjklkmnfdvusipa3kltgwuri"
-    // }
+const Header2 = () => {
     return (
         <div className="header-container">
             <div>
                 <Link className='link' to="/">Home</Link>
             </div>
             <div>
-                <Link className='link' to="/login">Log in</Link>
+                <Link className='link' to="/profile">Profile</Link>
             </div>
             <div>
-                <Link className='link' to="/signup">Sign up</Link>
+                <Link className='link' to="/add-book">Add Book</Link>
             </div>
         </div>
     )
 }
 
-export default Header
+export default Header2

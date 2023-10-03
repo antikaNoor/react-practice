@@ -11,7 +11,11 @@ function PostData() {
         control,
         formState: { errors },
         getValues,
-    } = useForm();
+    } = useForm({
+        defaultValues: {
+            title: ""
+        }
+    });
 
     const onSubmitHandler = () => {
         console.log("Form is submitted ");
