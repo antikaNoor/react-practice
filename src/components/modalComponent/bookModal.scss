@@ -1,4 +1,4 @@
-@import '../colors.scss';
+@import '../../utils/colors.scss';
 
 /* width */
 ::-webkit-scrollbar {
@@ -136,7 +136,7 @@
             justify-content: center;
             margin-top: 10%;
 
-            
+
             .button-container {
                 display: flex;
                 justify-content: center;

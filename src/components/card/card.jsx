@@ -1,10 +1,8 @@
 import './card.scss'
 import Button from '../button/button'
 import DeleteData from '../deleteData/deleteData'
-import EditData from '../editData/editData'
 import SetInitialData from '../editData/setInititalData'
-import { useState } from 'react'
-import axiosInstance from '../../../utils/axiosInstance'
+import axiosInstance from '../../utils/axiosInstance'
 
 const Card = ({ data, updateModal, setRelatedBook }) => {
     const viewButtonValue = "View"
@@ -31,7 +29,7 @@ const Card = ({ data, updateModal, setRelatedBook }) => {
                     // DELETE
                     const handleDeleteBook = () => {
                         axiosInstance
-                            .delete(`/delete-book/${book._id}`)
+                            .delete(`/book/delete-book/${book._id}`)
                             .then((response) => {
                                 if (response.status !== 200) {
                                     alert("Something went wrong.")

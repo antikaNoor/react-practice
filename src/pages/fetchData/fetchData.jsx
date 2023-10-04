@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import Card from '../card/card'
+import Card from '../../components/card/card'
 import './fetchData.scss'
-import SearchBar from '../searchBar/searchBar'
-import Pagination from '../pagination/pagination'
-import BookModal from '../modalComponent/bookModal'
-import Dropdown from '../dropdown/dropdown'
-import useBookHook from '../hooks/useBookHook'
-import Header2 from '../header/header2'
+import SearchBar from '../../components/searchBar/searchBar'
+import Pagination from '../../components/pagination/pagination'
+import BookModal from '../../components/modalComponent/bookModal'
+import Dropdown from '../../components/dropdown/dropdown'
+import useBookHook from '../../hooks/useBookHook'
+import Header2 from '../../components/header/header2'
+import Footer from '../../components/footer/footer'
 
 function FetchData() {
     const { noBooksFound, fetchedData, currentPage, totalPages, fetchBooks, searchQuery, handleSearchQuery, sortOptionLabels, orderOptionLabels,
@@ -61,6 +62,7 @@ function FetchData() {
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={fetchBooks} />
+            <Footer />
         </div>
     )
 }

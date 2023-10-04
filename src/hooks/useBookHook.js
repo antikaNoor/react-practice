@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import axiosInstance from '../../../utils/axiosInstance'
+import axiosInstance from '.././utils/axiosInstance'
 // import axios from 'axios'
 
 const useBookHook = () => {
@@ -48,7 +48,7 @@ const useBookHook = () => {
     const fetchBooks = (page) => {
         // Fetch data from API
         axiosInstance
-            .get(`/get-all-books?page=${page}&limit=6&sortParam=${selectedSortOption}&sortOrder=${selectedOrderOption}&search=${searchQuery}`)
+            .get(`/book/get-all-books?page=${page}&limit=6&sortParam=${selectedSortOption}&sortOrder=${selectedOrderOption}&search=${searchQuery}`)
             .then((response) => response.data)
             .then((data) => {
                 // Check if there are no books found
@@ -99,7 +99,7 @@ const useBookHook = () => {
     const handleAddBook = (formData) => {
         // Make a POST request to your API endpoint
         axiosInstance
-            .post('/add-book', formData)
+            .post('/book/add-book', formData)
             .then((response) => {
                 if (response.status !== 200) {
                     alert("Something went wrong.")
@@ -140,7 +140,7 @@ const useBookHook = () => {
         sortOptionLabels, orderOptionLabels, handleSortChange, handleOrderChange,
         orderOptions, sortOptions, selectedSortOption, selectedOrderOption,
         // for adding book
-        formData, onChangeHandler, refetchBooks
+        formData, onChangeHandler, refetchBooks, handleAddBook
     }
 }
 

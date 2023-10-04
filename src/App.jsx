@@ -1,5 +1,5 @@
-import FetchData from "./components/fetchData/fetchData";
-import PostData from "./components/postData/postData";
+import FetchData from "./pages/fetchData/fetchData";
+import PostData from "./pages/postData/postData";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Home from "./pages/Home/Home"
 import Login from "./pages/Login/Login"

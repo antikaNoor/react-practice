@@ -3,35 +3,38 @@ import Header from '../../components/header/header'
 import './Signup.scss'
 import { useForm, Controller } from "react-hook-form"
 import { AiFillEye } from "react-icons/ai";
+import useAuthHook from '../../hooks/useAuthHook';
 
 function Signup() {
 
+  const { handleSignUp } = useAuthHook()
   const {
     handleSubmit,
     control,
     formState: { errors },
     getValues,
-    watch,
-    setValue
+    watch
   } = useForm({
     mode: "onChange",
     defaultValues: {
       reader_name: "",
       reader_email: "",
+      balance: null,
       password: "",
       confirm_password: "",
     },
   });
 
   const onSubmitHandler = (data) => {
-    setValue("fullname", getValues("firstname") + getValues("lastname"))
-
+    // setValue("fullname", getValues("firstname") + getValues("lastname"))
+    delete data.confirm_password;
     console.log("Form is submitted ");
-    console.log("First name ", getValues("firstname"));
-    console.log("Last name ", getValues("lastname"));
-    console.log("Full name ", getValues("fullname"));
+    // console.log("First name ", getValues("firstname"));
+    // console.log("Last name ", getValues("lastname"));
+    // console.log("Full name ", getValues("fullname"));
     console.log("Username ", getValues("reader_name"));
     console.log("Reader's email ", getValues("reader_email"));
+    handleSignUp(data)
 
   };
 
@@ -56,7 +59,7 @@ function Signup() {
             <form onSubmit={handleSubmit(onSubmitHandler)}>
               <div className='form-container'>
 
-                <div className='form-items'>
+                {/* <div className='form-items'>
                   <h4>First Name</h4>
                   <Controller
                     name="firstname"
@@ -124,7 +127,7 @@ function Signup() {
                     )}
                   />
                   {errors.fullname && <h5 className='text'>{errors.fullname.message}</h5>}
-                </div>
+                </div> */}
 
                 <div className='form-items'>
                   <h4>Username</h4>
@@ -174,6 +177,33 @@ function Signup() {
                     )}
                   />
                   {errors.reader_email && <h5 className='text'>{errors.reader_email.message}</h5>}
+                </div>
+
+                <div className='form-items'>
+                  <h4>Balance</h4>
+                  <Controller
+                    name="balance"
+                    control={control}
+                    // rules={{
+                    //   required: "Balance is required",
+                    //   minLength: {
+                    //     value: 4,
+                    //     message: "Minimum length must be 4",
+                    //   },
+                    //   maxLength: {
+                    //     value: 30,
+                    //     message: "Maximum length must be 30",
+                    //   },
+                    // }}
+                    render={({ field }) => (
+                      <input className='inp' type='number'
+                        placeholder="Enter balance"
+                        {...field}
+                        style={{ border: errors.balance ? "1px solid red" : "" }}
+                      />
+                    )}
+                  />
+                  {errors.balance && <h5 className='text'>{errors.balance.message}</h5>}
                 </div>
 
                 <div className='form-items'>

@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import './button.scss'
 
 const Button = ({ type, value, onClick }) => {

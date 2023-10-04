@@ -1,4 +1,4 @@
-@import '../../components/colors.scss';
+@import '../../utils/colors.scss';
 
 * {
     margin: 0;
@@ -40,6 +40,7 @@
         }
 
         .form-container {
+            height: auto;
 
             .form-items {
                 display: grid;
@@ -47,20 +48,18 @@
                 padding: 10px 50px;
 
                 .input-container {
-                    width: 300px;
+                    // width: 300px;
                     display: flex;
                     flex-direction: row;
                     justify-content: center;
                     align-items: center;
-                    padding: 6px 30px;
-                    /* Adjust the padding to accommodate the width of the eye icon */
+                    padding: 6px 100px 6px 10px;
                     border-radius: 20px;
                     background-color: $lightColor;
                     gap: 10px;
-                    /* Adjust the gap between input and icon */
 
                     .eye-icon-container {
-                        width: 100%;
+                        // width: 100%;
                         color: $darkColor;
                         cursor: pointer;
                         width: fit-content;
@@ -70,7 +69,7 @@
                     }
 
                     input {
-                        width: 100%;
+                        // width: 100%;
                         border: none;
                         outline: none;
                     }
@@ -81,7 +80,7 @@
                     flex-direction: row;
                     justify-content: center;
                     align-items: center;
-                    padding: 6px 10px 6px 10px;
+                    padding: 6px 50px 6px 10px;
                     border-radius: 20px;
                     border: none;
                     outline: none;
@@ -95,6 +94,7 @@
             .text {
                 color: rgb(255, 43, 43);
                 font-weight: normal;
+                width: 200px;
             }
 
             h4 {
