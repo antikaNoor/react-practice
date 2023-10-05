@@ -48,14 +48,13 @@
                 padding: 10px 50px;
 
                 .input-container {
-                    // width: 300px;
                     display: flex;
                     flex-direction: row;
-                    justify-content: center;
-                    align-items: center;
-                    padding: 6px 100px 6px 10px;
+                    /* justify-content: center; */
+                    /* align-items: center; */
+                    padding: 6px 10px 6px 10px;
                     border-radius: 20px;
-                    background-color: $lightColor;
+                    background-color: #ffffff;
                     gap: 10px;
 
                     .eye-icon-container {

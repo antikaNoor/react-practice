@@ -20,7 +20,7 @@ function Home() {
             <h1 className="heading">Once Upon A Time</h1>
             <p className="heading-text">Dive into the realm of books!</p>
             <button className="btn" onClick={() => {
-              navigate('/fetch')
+              navigate('/view-books')
             }}>Explore
               {/* <Link className='link' to='/fetch'>Explore</Link> */}
             </button>

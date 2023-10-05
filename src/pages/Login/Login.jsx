@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from '../../components/header/header'
-import './Login.scss'
+import '../Signup/Signup.scss'
 import { useForm, Controller } from "react-hook-form"
+import { AiFillEye } from "react-icons/ai";
+import useAuthHook from '../../hooks/useAuthHook';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+
+  const navigate = useNavigate()
+  const { handleLogin } = useAuthHook()
 
   const {
     handleSubmit,
@@ -17,23 +23,32 @@ function Login() {
     }
   });
 
-  const onSubmitHandler = () => {
+  const onSubmitHandler = (data) => {
     console.log("Form is submitted ");
     console.log("Reader's email ", getValues("reader_email"));
+    handleLogin(data)
+    console.log("awefhg8y")
+    navigate("/add-book")
   };
+
+  const [showPassword, setShowPassword] = useState(false)
+
+  const togglePasswordVisibility = (e) => {
+    setShowPassword(!showPassword)
+  }
 
   return (
     <>
       <Header />
-      <div className='login-container'>
-        <div className='login-overlay'>
-          <div className='login'>
-            <h1 className='login-header'>Log in to Your Account</h1>
+      <div className='signup-container'>
+        <div className='overlay'>
+          <div className='sign-up'>
+            <h1 className='sign-up-header'>Log in to Your Account</h1>
             <form onSubmit={handleSubmit(onSubmitHandler)}>
-              <div className='login-form-container'>
+              <div className='form-container'>
 
-                <div className='login-form-items'>
-                  <h4 className='login-text'>Email</h4>
+                <div className='form-items'>
+                  <h4>Email</h4>
                   <Controller
                     name="reader_email"
                     control={control}
@@ -45,18 +60,18 @@ function Login() {
                       },
                     }}
                     render={({ field }) => (
-                      <input
+                      <input className='inp'
                         placeholder="Enter email"
                         {...field}
                         style={{ border: errors.reader_email ? "1px solid red" : "" }}
                       />
                     )}
                   />
-                  {errors.reader_email && <h5>{errors.reader_email.message}</h5>}
+                  {errors.reader_email && <h5 className='text'>{errors.reader_email.message}</h5>}
                 </div>
 
-                <div className='login-form-items'>
-                  <h4 className='login-text'>Password</h4>
+                <div className='form-items'>
+                  <h4>Password</h4>
                   <Controller
                     name="password"
                     control={control}
@@ -68,16 +83,22 @@ function Login() {
                       },
                     }}
                     render={({ field }) => (
-                      <input type='password'
-                        placeholder="Enter password"
-                        {...field}
-                        style={{ border: errors.password ? "1px solid red" : "" }}
-                      />
+                      <div className='input-container'>
+                        <input
+                          placeholder="Enter password"
+                          type={showPassword ? 'text' : 'password'}
+                          {...field}
+                          style={{ border: errors.confirm_password ? "1px solid red" : "" }}
+                        />
+                        <div className="eye-icon-container" onClick={togglePasswordVisibility}>
+                          <AiFillEye />
+                        </div>
+                      </div>
                     )}
                   />
-                  {errors.password && <h5>{errors.password.message}</h5>}
+                  {errors.password && <h5 className='text'>{errors.password.message}</h5>}
                 </div>
-                <button className='login-btn' type="submit">Submit</button>
+                <button className='btn' type="submit">Submit</button>
               </div>
             </form>
           </div>

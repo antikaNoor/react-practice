@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Card from '../../components/card/card'
-import './fetchData.scss'
+import './AllBooksList.scss'
 import SearchBar from '../../components/searchBar/searchBar'
 import Pagination from '../../components/pagination/pagination'
 import BookModal from '../../components/modalComponent/bookModal'

@@ -2,7 +2,7 @@ import './card.scss'
 import Button from '../button/button'
 import DeleteData from '../deleteData/deleteData'
 import SetInitialData from '../editData/setInititalData'
-import axiosInstance from '../../utils/axiosInstance'
+import { axiosInstance } from '../../utils/axiosInstance'
 
 const Card = ({ data, updateModal, setRelatedBook }) => {
     const viewButtonValue = "View"

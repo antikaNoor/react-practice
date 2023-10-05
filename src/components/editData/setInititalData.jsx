@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import EditData from './editData'
-import axiosInstance from '../../utils/axiosInstance'
+import { axiosInstance } from '../../utils/axiosInstance'
 
 function setInititalData({ bookId, title, author, genre, description, pages, price, stock, branch, image, }) {
     //set the form data for edit

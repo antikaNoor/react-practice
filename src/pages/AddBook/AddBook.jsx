@@ -1,14 +1,19 @@
-// import Form from '../form/form'
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import useBookHook from '../../hooks/useBookHook';
 import Button from '../../components/button/button';
-import './postData.scss'
+import './AddBook.scss'
+import { addBook } from '../../redux/actions/bookActions'
 import { useForm, Controller } from "react-hook-form"
 import Header2 from '../../components/header/header2';
 
-function PostData() {
+function AddBook() {
 
-    const { handleAddBook } = useBookHook()
+    const dispatch = useDispatch();
+    const booksFromRedux = useSelector((state) => state.books);
+    // const [data, setData] = useState();
 
+    // const { handleAddBook } = useBookHook()
     const {
         handleSubmit,
         control,
@@ -17,22 +22,35 @@ function PostData() {
     } = useForm({
         mode: onchange,
         defaultValues: {
-            title: ""
+            title: "",
+            author: "",
+            description: "",
+            pages: null,
+            price: null,
+            stock: null,
+            branch: "",
+            image: ""
         }
     });
 
-    const onSubmitHandler = (data) => {
-        console.log("Form is submitted ");
-        console.log("The title ", getValues("title"));
-        console.log("The author ", getValues("author"));
-        console.log("The genre ", getValues("genre"));
-        console.log("The description ", getValues("description"));
-        console.log("The price ", getValues("price"));
-        console.log("The stock ", getValues("stock"));
-        console.log("The branch ", getValues("branch"));
-        console.log("The image ", getValues("image"));
-        handleAddBook(data)
+    const addNewBook = (e) => {
+        // e.preventDefault()
+        console.log("title", "author", "description", "pages", "price", "stock", "branch", "image")
+        dispatch(addBook(e.title, e.author, e.description, e.pages, e.price, e.stock, e.branch, e.image));
     };
+
+    // const onSubmitHandler = (data) => {
+    //     console.log("Form is submitted ");
+    //     console.log("The title ", getValues("title"));
+    //     console.log("The author ", getValues("author"));
+    //     console.log("The genre ", getValues("genre"));
+    //     console.log("The description ", getValues("description"));
+    //     console.log("The price ", getValues("price"));
+    //     console.log("The stock ", getValues("stock"));
+    //     console.log("The branch ", getValues("branch"));
+    //     console.log("The image ", getValues("image"));
+    //     handleAddBook(data)
+    // };
 
     return (
 
@@ -40,7 +58,7 @@ function PostData() {
             <Header2 />
             <div className='add-book-container'>
                 <h1 className='add-book-header'>Add a New Book</h1>
-                <form onSubmit={handleSubmit(onSubmitHandler)}>
+                <form onSubmit={handleSubmit(addNewBook)}>
                     <div className='form-container'>
                         <div className='form-items'>
                             <h4>Title</h4>
@@ -104,7 +122,7 @@ function PostData() {
                             {errors.author && <h5>{errors.author.message}</h5>}
                         </div>
 
-                        <div className='form-items'>
+                        {/* <div className='form-items'>
                             <h4>Genre</h4>
                             <Controller
                                 name="genre"
@@ -118,7 +136,7 @@ function PostData() {
                                 )}
                             />
                             {errors.genre && <h5>{errors.genre.message}</h5>}
-                        </div>
+                        </div> */}
 
                         <div className='form-items'>
                             <h4>Description</h4>
@@ -237,11 +255,30 @@ function PostData() {
                         </div>
 
                     </div>
-                    <button type="submit">Submit</button>
+                    <button type="submit">Add</button>
                 </form>
+                {console.log(booksFromRedux)}
+                {/* {JSON.stringify(booksFromRedux)} */}
+                <div className="form-data">
+                    <h2>Form Data</h2>
+                    <div className="form-item-2">
+                        {booksFromRedux.bookList.map((book, index) => (
+                            <div key={index}>
+                                <strong>Title:</strong> {book.title}<br />
+                                <strong>Author:</strong> {book.author}<br />
+                                <strong>Description:</strong> {book.description}<br />
+                                <strong>Pages:</strong> {book.pages}<br />
+                                <strong>Price:</strong> {book.price}<br />
+                                <strong>Stock:</strong> {book.stock}<br />
+                                <strong>Branch:</strong> {book.branch}<br />
+                                <img src={book.image}></img><br />
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
         </>
     );
 }
 
-export default PostData
+export default AddBook

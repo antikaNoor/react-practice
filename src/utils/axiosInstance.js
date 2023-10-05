@@ -5,13 +5,18 @@ const axiosInstance = axios.create({
     timeout: 5000
 })
 
-// axiosInstance.interceptors.request.use((config) => {
-//     const token = localStorage.getItem("token")
+const axiosInstanceToken = axios.create({
+    baseURL: "http://localhost:8000",
+    timeout: 5000
+})
 
-//     if (token) {
-//         config.headers.Authorization = `Bearer ${token}`
-//     }
-//     return config
-// })
+axiosInstanceToken.interceptors.request.use((config) => {
+    const token = localStorage.getItem("token")
 
-export default axiosInstance
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
+})
+
+export { axiosInstance, axiosInstanceToken }

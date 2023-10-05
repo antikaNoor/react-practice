@@ -1,12 +1,5 @@
 import { useEffect, useState } from 'react'
-import axiosInstance from '.././utils/axiosInstance'
-
-//set the form data
-// const [formData, setFormData] = useState({
-//     reader_name: "",
-//     reader_email: "",
-//     password: ""
-// })
+import { axiosInstance, axiosInstanceToken } from '.././utils/axiosInstance'
 
 const useAuthHook = () => {
     const handleSignUp = (formData) => {
@@ -15,7 +8,7 @@ const useAuthHook = () => {
         axiosInstance
             .post('/auth/signup', formData)
             .then((response) => {
-                if (!response.ok) {
+                if (response.status !== 200) {
                     alert("Something went wrong.")
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -32,7 +25,33 @@ const useAuthHook = () => {
 
 
     };
-    return { handleSignUp }
+
+    const handleLogin = (formData) => {
+        // Make a POST request to your API endpoint
+        console.log(formData)
+        axiosInstanceToken
+            .post('/auth/login', formData)
+            .then((response) => {
+                if (response.status !== 200) {
+                    alert("Something went wrong.")
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.data
+            })
+            .then((response) => {
+                //get token from response
+                const token = response.data.token;
+                console.log("token", token)
+
+                //set JWT token to local
+                localStorage.setItem("token", token);
+            })
+            .catch((error) => {
+                alert('Authentication failed!')
+                console.error('Error logging in:', error);
+            });
+    }
+    return { handleSignUp, handleLogin }
 }
 
 export default useAuthHook;

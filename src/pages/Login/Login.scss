@@ -42,14 +42,33 @@
 
         .login-form-container {
 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            height: auto;
 
             .login-form-items {
                 display: grid;
                 gap: 5px;
                 padding: 10px 50px;
+
+                .login-input-container {
+                    display: flex;
+                    flex-direction: row;
+                    /* justify-content: center; */
+                    /* align-items: center; */
+                    padding: 6px 10px 6px 10px;
+                    border-radius: 20px;
+                    background-color: #ffffff;
+                    gap: 10px;
+
+                    .login-eye-icon-container {
+                        // width: 100%;
+                        color: $darkColor;
+                        cursor: pointer;
+                        width: fit-content;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
 
                 .login-text {
                     color: $lightColor;
@@ -57,7 +76,7 @@
                 }
 
                 input {
-                    padding: 6px 150px 6px 10px;
+                    padding: 6px 10px 6px 10px;
                     border-radius: 20px;
                     border: none;
                     outline: none;
