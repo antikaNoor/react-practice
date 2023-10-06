@@ -3,9 +3,11 @@ import Button from '../button/button'
 import DeleteData from '../deleteData/deleteData'
 import SetInitialData from '../editData/setInititalData'
 import { axiosInstance } from '../../utils/axiosInstance'
+import { useNavigate } from 'react-router-dom'
 
 const Card = ({ data, updateModal, setRelatedBook }) => {
     const viewButtonValue = "View"
+    const navigate = useNavigate()
 
     return (
         <div className="card-container">
@@ -39,6 +41,7 @@ const Card = ({ data, updateModal, setRelatedBook }) => {
                             })
                             .then((data) => {
                                 alert("Book Deleted Successfully!")
+                                navigate('/view-books')
                                 console.log('Book deleted successfully:', data);
                             })
                             .catch((error) => {
@@ -47,7 +50,8 @@ const Card = ({ data, updateModal, setRelatedBook }) => {
                     };
                     const onDeleteSubmitHandler = (e) => {
                         e.preventDefault();
-                        handleDeleteBook(); // Call the handleAddBook function from your custom hook
+                        handleDeleteBook();
+                        window.location.reload();
                     };
 
                     return <div key={index} className='list-items'>

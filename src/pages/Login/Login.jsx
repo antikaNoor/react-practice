@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 
 function Login() {
 
-  const navigate = useNavigate()
   const { handleLogin } = useAuthHook()
 
   const {
@@ -27,8 +26,6 @@ function Login() {
     console.log("Form is submitted ");
     console.log("Reader's email ", getValues("reader_email"));
     handleLogin(data)
-    console.log("awefhg8y")
-    navigate("/add-book")
   };
 
   const [showPassword, setShowPassword] = useState(false)
@@ -77,10 +74,6 @@ function Login() {
                     control={control}
                     rules={{
                       required: "Password is required",
-                      pattern: {
-                        value: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}$/,
-                        message: "Password must contain at least one capital letter, one digit, one special character, and be 8 characters or more long.",
-                      },
                     }}
                     render={({ field }) => (
                       <div className='input-container'>

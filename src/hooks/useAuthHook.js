@@ -1,7 +1,13 @@
-import { useEffect, useState } from 'react'
 import { axiosInstance, axiosInstanceToken } from '.././utils/axiosInstance'
+import { useDispatch } from 'react-redux';
+import { addUser, logoutUser } from '../redux/Slices/UserSlice';
+import { useNavigate } from 'react-router-dom';
+
 
 const useAuthHook = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     const handleSignUp = (formData) => {
         // Make a POST request to your API endpoint
         console.log(formData)
@@ -26,10 +32,10 @@ const useAuthHook = () => {
 
     };
 
-    const handleLogin = (formData) => {
+    const handleLogin = async (formData) => {
         // Make a POST request to your API endpoint
         console.log(formData)
-        axiosInstanceToken
+        await axiosInstanceToken
             .post('/auth/login', formData)
             .then((response) => {
                 if (response.status !== 200) {
@@ -39,19 +45,22 @@ const useAuthHook = () => {
                 return response.data
             })
             .then((response) => {
-                //get token from response
-                const token = response.data.token;
-                console.log("token", token)
-
-                //set JWT token to local
-                localStorage.setItem("token", token);
+                dispatch(addUser(response.data))
+                // navigate("/login/add-book");
             })
             .catch((error) => {
                 alert('Authentication failed!')
                 console.error('Error logging in:', error);
             });
     }
-    return { handleSignUp, handleLogin }
+
+    const handleLogout = () => {
+        // Dispatch the logout action to clear user data
+        dispatch(logoutUser());
+        // Redirect the user to the home page
+        navigate('/')
+    };
+    return { handleSignUp, handleLogin, handleLogout }
 }
 
 export default useAuthHook;

@@ -125,7 +125,14 @@ const useBookHook = () => {
         // getting name and value pair from frontend
         const { name, value } = e.target
         // setting the name and value in the formdata object 
-        setFormData({ ...formData, [name]: value })
+        // If the input field is 'genre', split the value by commas and store it as an array
+        if (name === 'genre') {
+            const genreArray = value.split(',').map((genre) => genre.trim());
+            setFormData({ ...formData, [name]: genreArray });
+        } else {
+            // For other input fields, set the value directly into the formData object
+            setFormData({ ...formData, [name]: value });
+        }
     }
 
     const refetchBooks = () => {

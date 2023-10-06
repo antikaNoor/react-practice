@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import axios from "axios";
 
 const Authenticate = () => {
-    const check = localStorage.getItem("token");
+    const check = localStorage.getItem("user");
     console.log("Authenticating", check);
 
     return check ? (

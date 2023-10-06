@@ -18,8 +18,8 @@ function App() {
         <Route path="signup" element={<Signup />} />
         <Route path="view-books" element={<AllBooksList />} />
         <Route path="about" element={<About />} />
-        <Route path="/" element={<Authenticate />}>
-          <Route path="add-book" element={<AddBook />} />
+        <Route element={<Authenticate />}>
+          <Route path="login/add-book" element={<AddBook />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

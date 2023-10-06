@@ -45,7 +45,8 @@ function setInititalData({ bookId, title, author, genre, description, pages, pri
     };
     const onEditSubmitHandler = (e) => {
         e.preventDefault();
-        handleEditBook(editFormData); // Call the handleAddBook function from your custom hook
+        handleEditBook(editFormData);
+        window.location.reload();
     };
 
     return (
