@@ -1,24 +1,36 @@
-// import FetchData from "./components/fetchData/fetchData";
-// import PostData from "./components/postData/postData";
+import AllBooksList from "./pages/AllBooksList/AllBooksList";
+import AddBook from "./pages/AddBook/AddBook";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Home from "./pages/Home/Home"
-import Signin from "./pages/Signin"
-import Signup from "./pages/Signup"
-import FetchData from "../src/components/fetchData/fetchData"
+import Login from "./pages/Login/Login"
+import Signup from "./pages/Signup/Signup"
+import NotFoundPage from "./pages/NotFoundPage";
+import AdminAuthenticate from "./pages/AdminAuthenticate";
+import UserAuthenticate from "./pages/UserAuthenticate";
+import About from "./pages/About/About";
+import BookList from "./pages/BookListGeneral/BookList";
+import UserProfile from './pages/UserProfile/UserProfile'
 
 function App() {
   console.log("this is app")
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/signin" element={<Signin/>} />
-        <Route path="/signup" element={<Signup/>} />
-        <Route path="/fetch" element={<FetchData/>} />
+        <Route path="/" element={<Home />} />
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<Signup />} />
+        <Route path="view-books-general" element={<BookList />} />
+        <Route path="about" element={<About />} />
+        <Route element={<AdminAuthenticate />}>
+          <Route path="login/add-book" element={<AddBook />} />
+        </Route>
+        <Route element={<UserAuthenticate />}>
+        <Route path="login/profile" element={<UserProfile />} />
+        </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   )
-
 }
 
 export default App

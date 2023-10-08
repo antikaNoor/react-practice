@@ -1,19 +1,18 @@
 import React, { useState } from 'react'
-import Card from '../card/card'
-import './fetchData.scss'
-import SearchBar from '../searchBar/searchBar'
-import Pagination from '../pagination/pagination'
-import BookModal from '../modalComponent/bookModal'
-import Dropdown from '../dropdown/dropdown'
-import useBookHook from '../hooks/useBookHook'
+import UserCard from '../../components/UserCard/UserCard'
+// import './AllBooksList.scss'
+import SearchBar from '../../components/searchBar/searchBar'
+import Pagination from '../../components/pagination/pagination'
+import BookModal from '../../components/modalComponent/bookModal'
+import Dropdown from '../../components/dropdown/dropdown'
+import useBookHook from '../../hooks/useBookHook'
+import Header from '../../components/header/header'
+import Footer from '../../components/footer/footer'
 
-function FetchData() {
+function BookList() {
+
     const { noBooksFound, fetchedData, currentPage, totalPages, fetchBooks, searchQuery, handleSearchQuery, sortOptionLabels, orderOptionLabels,
         handleSortChange, handleOrderChange, orderOptions, sortOptions, selectedSortOption, selectedOrderOption } = useBookHook();
-
-    //search
-    const searchType = 'text';
-    const searchPlaceholder = 'Search by title, author, or genre...';
 
     // modal
     const [showBookModal, setShowBookModal] = useState(false)
@@ -26,12 +25,13 @@ function FetchData() {
 
     return (
         <div className='container'>
+            <Header />
             {/* modal */}
             {showBookModal && <BookModal updateModal={updateModal} relatedBook={relatedBook} />}
             {/* searching */}
             <div className='search-book'>
-                <SearchBar type={searchType}
-                    placeholder={searchPlaceholder}
+                <SearchBar type='text'
+                    placeholder='Search by title, author, or genre...'
                     value={searchQuery}
                     onChange={handleSearchQuery} />
                 <div className='dropdown'>
@@ -51,16 +51,16 @@ function FetchData() {
             {noBooksFound ? (
                 <div className="no-books-found-message">No books found</div>
             ) : (
-                fetchedData && <Card data={fetchedData} updateModal={updateModal} setRelatedBook={setRelatedBook} />
+                fetchedData && <UserCard data={fetchedData} updateModal={updateModal} setRelatedBook={setRelatedBook} />
             )}
-            {/* {fetchedData && <Card data={fetchedData} updateModal={updateModal} setRelatedBook={setRelatedBook} />} */}
             {/* pagination */}
             <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={fetchBooks} />
+            <Footer />
         </div>
     )
 }
 
-export default FetchData
+export default BookList

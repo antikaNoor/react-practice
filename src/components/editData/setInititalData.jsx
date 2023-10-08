@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import EditData from './editData'
-import axiosInstance from '../../../utils/axiosInstance'
+import { axiosInstance } from '../../utils/axiosInstance'
 
 function setInititalData({ bookId, title, author, genre, description, pages, price, stock, branch, image, }) {
     //set the form data for edit
@@ -27,7 +27,7 @@ function setInititalData({ bookId, title, author, genre, description, pages, pri
     const handleEditBook = (editFormData) => {
         // Make a POST request to your API endpoint
         axiosInstance
-            .patch(`/edit-book/${bookId}`, editFormData)
+            .patch(`/book/edit-book/${bookId}`, editFormData)
             .then((response) => {
                 if (response.status !== 200) {
                     alert("Something went wrong.")
@@ -45,7 +45,8 @@ function setInititalData({ bookId, title, author, genre, description, pages, pri
     };
     const onEditSubmitHandler = (e) => {
         e.preventDefault();
-        handleEditBook(editFormData); // Call the handleAddBook function from your custom hook
+        handleEditBook(editFormData);
+        window.location.reload();
     };
 
     return (
