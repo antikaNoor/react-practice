@@ -1,40 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { updateUserProfileImage } from '../redux/Slices/UserSlice';
+import { axiosInstance, axiosInstanceToken } from '.././utils/axiosInstance';
 
 const useReaderHook = () => {
-  const dispatch = useDispatch();
-  const [imageUrl, setImageUrl] = useState(null);
+  const [fetchedTransaction, setFetchedTransaction] = useState([]);
+  const checkString = localStorage.getItem("user");
+  const check = JSON.parse(checkString)
 
+  const fetchTransactions = async () => {
+    // Fetch data from API with custom headers
+    await axiosInstanceToken
+      .get("/cart/show-my-transaction", {
+        headers: {
+          'Authorization': `Bearer ${check.token}`,
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => {
+        console.log(response.data.data)
+        setFetchedTransaction(response.data.data)
+      })
+      .catch((error) => {
+        // Handle other errors (network error, timeout, etc.) here.
+        console.error("Other Error:", error);
+      })
+  };
   useEffect(() => {
-    const storedImageUrl = localStorage.getItem('userProfileImage');
-    if (storedImageUrl) {
-      setImageUrl(storedImageUrl);
-    }
+    fetchTransactions();
+
   }, []);
 
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-
-      reader.onload = (event) => {
-        const uploadedImageUrl = event.target.result;
-        setImageUrl(uploadedImageUrl);
-
-        // Save the image URL in local storage
-        localStorage.setItem('userProfileImage', uploadedImageUrl);
-
-        // Dispatch an action to update the user's profile image in Redux
-        dispatch(updateUserProfileImage(uploadedImageUrl));
-      };
-
-      reader.readAsDataURL(file);
-    }
-  };
-
-  // Return an object with the properties and functions you want to use in your component
-  return { imageUrl, handleFileUpload };
+  return { fetchedTransaction };
 };
 
 export default useReaderHook;

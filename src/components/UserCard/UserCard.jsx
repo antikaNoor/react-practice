@@ -1,6 +1,6 @@
 import Button from '../button/button'
 import RatingStar from '../../utils/RatingStars'
-import { addToCart } from '../../redux/Slices/UserSlice'
+// import { addToCart } from '../../redux/Slices/UserSlice'
 
 const Card = ({ data, updateModal, setRelatedBook }) => {
 

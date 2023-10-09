@@ -8,8 +8,6 @@ const initialState = savedUser
         _id: "",
         email: "",
         token: "",
-        userProfileImage: null,
-        cart: [],
     };
 
 const userSlice = createSlice({
@@ -23,24 +21,14 @@ const userSlice = createSlice({
 
             localStorage.setItem("user", JSON.stringify(action.payload));
         },
-        addToCart: (state, action) => {
-            if (!Array.isArray(state.cart)) {
-                state.cart = [];
-            }
-            state.cart.push(action.payload);
-        },
-        updateUserProfileImage: (state, action) => {
-            state.userProfileImage = action.payload;
-        },
         logoutUser: (state) => {
             state.email = "";
             state.token = "";
-            state.cart = [];
             localStorage.removeItem('user');
         },
     },
 });
 
-export const { addUser, addToCart, updateUserProfileImage, logoutUser } = userSlice.actions;
+export const { addUser, logoutUser } = userSlice.actions;
 
 export default userSlice.reducer;

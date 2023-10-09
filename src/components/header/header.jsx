@@ -1,9 +1,9 @@
 import './header.scss'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import jwt_decode from "jwt-decode";
-import { Navigate } from 'react-router-dom';
 import useAuthHook from '../../hooks/useAuthHook';
-import {PiShoppingCartFill, PiHeartStraightFill} from 'react-icons/pi'
+import { PiShoppingCartFill, PiHeartStraightFill } from 'react-icons/pi'
+import { useSelector } from 'react-redux';
 
 /* There are 3 cases here - 
 1. a general header
@@ -11,6 +11,8 @@ import {PiShoppingCartFill, PiHeartStraightFill} from 'react-icons/pi'
 3. header when a normal user logs in */
 
 const Header = () => {
+    const navigate = useNavigate()
+    const user = useSelector((state) => state.user);
     const { handleLogout } = useAuthHook()
     const checkString = localStorage.getItem("user");
     const check = JSON.parse(checkString)
@@ -65,11 +67,22 @@ const Header = () => {
                 <div>
                     <Link className='link' to="/login/profile">Profile</Link>
                 </div>
+                <img
+                    src={`https://robohash.org/${user.reader_email}?size=45x45`}
+                    alt=""
+                    className="userImgCircle"
+                />
                 <div>
-                    <PiShoppingCartFill title="Your Cart" style={{ fontSize: '24px' }}/>
+                    <PiShoppingCartFill
+                        title="Your Cart"
+                        style={{ fontSize: '24px', cursor: 'pointer' }}
+                        onClick={() => {
+                            navigate("/login/cart")
+                        }}
+                    />
                 </div>
                 <div>
-                    <PiHeartStraightFill title="Your Favorites" style={{ fontSize: '24px' }}/>
+                    <PiHeartStraightFill title="Your Favorites" style={{ fontSize: '24px' }} />
                 </div>
                 <div style={{ cursor: 'pointer' }} onClick={handleLogout}>
                     Log out
