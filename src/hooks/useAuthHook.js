@@ -46,7 +46,7 @@ const useAuthHook = () => {
             .then((response) => {
                 // console.log("response - ", response.data)
                 dispatch(addUser(response.data))
-                if(response.data.status === true) {
+                if (response.data.status === true) {
                     navigate("/login/add-book");
                 }
                 else {

@@ -11,6 +11,7 @@ const useCartHook = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+
     const handleAddToCart = async (bought_books) => {
         console.log("user id", user.reader);
         console.log("bought_books from hook", bought_books);
@@ -62,11 +63,67 @@ const useCartHook = () => {
                 console.error("Other Error:", error);
             })
     };
+
+    const handleDeleteFromCart = async (bought_books) => {
+        try {
+            const response = await axiosInstanceToken.patch('/cart/delete-from-cart', {
+                reader: user.reader,
+                bought_books,
+            },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${check.token}`,
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+            if (response.status === 200) {
+                dispatch(clearCart());
+
+                alert("Successfully removed from cart!");
+                console.log('Successfully removed from cart!', response.data);
+            } else {
+                // Handle non-200 status code here if necessary
+                alert("Something went wrong.");
+                console.error(`HTTP error! status: ${response.status}`);
+            }
+        } catch (error) {
+            alert('Error removing from cart');
+            console.error('Error removing from cart:', error);
+        }
+    }
+
+    const handleCheckout = async (cartId) => {
+        try {
+            const response = await axiosInstanceToken.post('/cart/checkout', {
+                cart: cartId
+            },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${check.token}`,
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+            if (response.status === 200) {
+
+                alert("Successfully checked out from cart!");
+                console.log('Successfully checked out from cart!', response.data);
+            } else {
+                alert("Something went wrong.");
+                console.error(`HTTP error! status: ${response.status}`);
+            }
+        } catch (error) {
+            alert('Error checked out from cart');
+            console.error('Error checked out from cart:', error);
+        }
+    }
+
     useEffect(() => {
         fetchedCartApi();
     }, []);
 
-    return { handleAddToCart, fetchedCart };
+    return { handleAddToCart, handleDeleteFromCart, fetchedCart, handleCheckout };
 };
 
 export default useCartHook;
