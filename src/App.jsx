@@ -10,6 +10,7 @@ import UserAuthenticate from "./pages/UserAuthenticate";
 import About from "./pages/About/About";
 import BookList from "./pages/BookListGeneral/BookList";
 import UserProfile from './pages/UserProfile/UserProfile'
+import UserCart from './pages/UserCart/UserCart'
 
 function App() {
   console.log("this is app")
@@ -25,7 +26,8 @@ function App() {
           <Route path="login/add-book" element={<AddBook />} />
         </Route>
         <Route element={<UserAuthenticate />}>
-        <Route path="login/profile" element={<UserProfile />} />
+          <Route path="login/profile" element={<UserProfile />} />
+          <Route path="login/cart" element={<UserCart />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

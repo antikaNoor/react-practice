@@ -1,11 +1,12 @@
 import './bookModal.scss'
 import Button from '../button/button'
 import RatingStar from '../../utils/RatingStars';
-import { addToCart } from '../../redux/Slices/UserSlice'
+// import { addToCart } from '../../redux/Slices/UserSlice'
 import { useDispatch } from 'react-redux';
 import jwt_decode from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
 import useCartHook from '../../hooks/useCartHook';
+import { addBookToCart } from '../../redux/Slices/CartSlice';
 
 export default function BookModal({ updateModal, relatedBook }) {
 
@@ -17,8 +18,18 @@ export default function BookModal({ updateModal, relatedBook }) {
     const { handleAddToCart } = useCartHook();
 
     const submitAddToCart = () => {
-        dispatch(addToCart(relatedBook));
-        handleAddToCart()
+        if (!relatedBook._id) {
+            console.log("book id null")
+            return;
+        }
+
+        const bought_books = {
+            id: relatedBook._id,
+            amount: 1
+        }
+        dispatch(addBookToCart(relatedBook))
+        // console.log(bought_books)
+        handleAddToCart(bought_books)
     };
 
     return (

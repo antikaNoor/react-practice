@@ -9,14 +9,10 @@ const savedUser = JSON.parse(localStorage.getItem('user'));
 
 // If user data exists in local storage, dispatch actions to update the store
 if (savedUser) {
-  store.dispatch(addUser(savedUser)); // Dispatch the addUser action
-  // Assuming you have saved cart data in local storage, you can dispatch addToCart as well
-  if (savedUser.cart) {
-    savedUser.cart.forEach((item) => {
-      store.dispatch(addToCart(item)); // Dispatch the addToCart action for each item in the cart
-    });
-  }
+  store.dispatch(addUser(savedUser));
 }
+
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
