@@ -255,12 +255,12 @@ function AddBook() {
                                 control={control}
                                 render={({ field }) => (
                                     <input
-                                        type="file"
-                                        placeholder="Enter image"
+                                        type="text"
+                                        placeholder="Enter image url"
                                         {...field}
                                         style={{ border: errors.image ? "1px solid red" : "" }}
                                     />
-                                    
+
                                 )}
                             />
                             {errors.image && <h5>{errors.image.message}</h5>}

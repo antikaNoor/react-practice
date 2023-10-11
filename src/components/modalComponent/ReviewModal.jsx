@@ -1,21 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import './bookModal.scss'
 import Form from '../form/form'
 import Button from '../button/button'
 import { useForm, Controller } from "react-hook-form"
-import { useState } from 'react'
 import useReviewHook from '../../hooks/useReviewHook'
 
-function ReviewModal({ toggleModal, relatedBook }) {
+function ReviewModal({ toggleModal, relatedBook, isEdit, existingReview, titleText }) {
 
-    const { addReview, fetchReview } = useReviewHook()
-    // console.log("relatedBook", relatedBook)
+    const { addReview, fetchReview, editReview } = useReviewHook()
 
     const {
         handleSubmit,
         control,
         formState: { errors },
-        getValues,
+        getValues, setValue
     } = useForm({
         mode: onchange,
         defaultValues: {
@@ -23,13 +21,40 @@ function ReviewModal({ toggleModal, relatedBook }) {
             text: ''
         }
     });
+    console.log("relatedBook", relatedBook)
+
+    const [formData, setFormData] = useState({
+        rating: existingReview ? existingReview.rating : 0,
+        text: existingReview ? existingReview.text : '',
+    });
+
+    useEffect(() => {
+        // Set initial form values when editing a review
+        if (existingReview) {
+            setValue('rating', existingReview.rating);
+            setValue('text', existingReview.text);
+        }
+    }, [existingReview, setValue]);
+
+
 
     const onSubmitHandler = (data) => {
-        console.log("Form is submitted ");
-        console.log("The rating ", getValues("rating"));
-        console.log("The text ", getValues("text"));
-        addReview(data)
+        if (!isEdit) {
+            console.log("Form is submitted ");
+            console.log("The rating ", getValues("rating"));
+            console.log("The text ", getValues("text"));
+            addReview(data)
+        }
+        else {
+            // console.log("Form is submitted ");
+            console.log("The rating ", getValues("rating"));
+            console.log("The text ", getValues("text"));
+            editReview(data)
+        }
     };
+    // useEffect(() => {
+    //     // fetchReview()
+    // }, [relatedBook])
     return (
         <div className='bookModal-container'>
             <div className='bookModal-item'>
@@ -38,7 +63,7 @@ function ReviewModal({ toggleModal, relatedBook }) {
                 }}></i>
 
                 <div className='add-book-container'>
-                    <h1 className='add-book-header'>Edit This Book</h1>
+                    <h1 className='add-book-header'>{titleText}</h1>
                     <form onSubmit={handleSubmit(onSubmitHandler)}>
                         <div className='review-container'>
                             <div className='form-items'>
@@ -98,7 +123,14 @@ function ReviewModal({ toggleModal, relatedBook }) {
                             value="Add"
                             onClick={() => {
                                 //api call
-                                addReview(relatedBook, getValues("rating"), getValues("text"))
+                                if (!isEdit) {
+                                    console.log("relatedBook from modal", isEdit)
+                                    addReview(relatedBook, getValues("rating"), getValues("text"))
+                                }
+                                else {
+                                    console.log("relatedBook from modal", relatedBook)
+                                    editReview(relatedBook, getValues("rating"), getValues("text"))
+                                }
                             }}
                         />
 

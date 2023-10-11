@@ -45,10 +45,28 @@ const useBookHook = () => {
     const sortOptionLabels = sortOptions.map((option) => option.label);
     const orderOptionLabels = orderOptions.map((option) => option.label);
 
+    //filter
+    const [priceRange, setPriceRange] = useState({ min: 0, max: 1000 });
+
+    // const handleMinPriceChange = (e) => {
+    //     setPriceRange({ ...priceRange, min: e.target.value });
+    //     // debouncedFetchBooks(currentPage);
+    // };
+
+    // const handleMaxPriceChange = (e) => {
+    //     setPriceRange({ ...priceRange, max: e.target.value });
+    //     // debouncedFetchBooks(currentPage);
+    // };
+
+    const handlePriceChange = (value) => {
+        setPriceRange(value);
+        // debouncedFetchBooks(currentPage);
+    };
+
     const fetchBooks = (page) => {
         // Fetch data from API
         axiosInstance
-            .get(`/book/get-all-books?page=${page}&limit=6&sortParam=${selectedSortOption}&sortOrder=${selectedOrderOption}&search=${searchQuery}`)
+            .get(`/book/get-all-books?page=${page}&limit=6&sortParam=${selectedSortOption}&sortOrder=${selectedOrderOption}&priceMin=${priceRange.min}&priceMax=${priceRange.max}&search=${searchQuery}`)
             .then((response) => response.data)
             .then((data) => {
                 // Check if there are no books found
@@ -65,13 +83,8 @@ const useBookHook = () => {
 
             })
             .catch((error) => {
-                if (axios.isAxiosError(error)) {
-                    // Handle AxiosError here, e.g., show a user-friendly error message.
-                    console.error("Axios Error:", error);
-                } else {
-                    // Handle other errors (network error, timeout, etc.) here.
-                    console.error("Other Error:", error);
-                }
+                // Handle other errors (network error, timeout, etc.) here.
+                console.error("Other Error:", error);
             })
     }
 
@@ -79,10 +92,10 @@ const useBookHook = () => {
         const timeOutFunc = setTimeout(() => {
             console.log("changed")
             fetchBooks(currentPage)
-        }, 500);
+        }, 2000);
 
         return () => clearTimeout(timeOutFunc);
-    }, [currentPage, searchQuery, selectedSortOption, selectedOrderOption]);
+    }, [currentPage, searchQuery, selectedSortOption, selectedOrderOption, priceRange]);
 
     /* FUNCTIONALITY FOR ADDING BOOKS */
 
@@ -143,7 +156,8 @@ const useBookHook = () => {
         sortOptionLabels, orderOptionLabels, handleSortChange, handleOrderChange,
         orderOptions, sortOptions, selectedSortOption, selectedOrderOption,
         // for adding book
-        formData, onChangeHandler, refetchBooks, handleAddBook
+        formData, onChangeHandler, refetchBooks, handleAddBook,
+        priceRange, handlePriceChange
     }
 }
 

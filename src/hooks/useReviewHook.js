@@ -62,11 +62,41 @@ const useReviewHook = () => {
             })
     };
 
-    useEffect(()=>{
-        fetchReview()
-    },[])
+    const editReview = async (book, rating, text) => {
+        try {
+            console.log("booook", book)
+            // console.log("readear", user.reader)
+            const response = await axiosInstanceToken.put('/review/update-review', {
+                book: book,
+                rating: rating,
+                text: text
+            },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${check.token}`,
+                        'Content-Type': 'application/json',
+                    },
+                });
 
-    return { addReview, fetchedReview }
+            if (response.status === 200) {
+
+                alert("Successfully added the review!");
+                console.log('Successfully added the review!', response.data);
+            } else {
+                alert("Something went wrong.");
+                console.error(`HTTP error! status: ${response.status}`);
+            }
+        } catch (error) {
+            alert('Error adding review');
+            console.error('Error adding review:', error);
+        }
+    }
+
+    useEffect(() => {
+        fetchReview()
+    }, [])
+
+    return { addReview, fetchedReview, editReview }
 }
 
 export default useReviewHook

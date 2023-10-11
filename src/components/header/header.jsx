@@ -44,10 +44,16 @@ const Header = () => {
                     <Link className='link' to="/">Home</Link>
                 </div>
                 <div>
-                    <Link className='link' to="/">Manage Books</Link>
+                    <Link className='link' to="/login/manage-book">Manage Books</Link>
                 </div>
                 <div>
-                    <Link className='link' to="/">Manage Users</Link>
+                    <Link className='link' to="/login/manage-user">Manage Users</Link>
+                </div>
+                {/* <div>
+                    <Link className='link' to="/login/show-cart">Carts</Link>
+                </div> */}
+                <div>
+                    <Link className='link' to="/login/show-transaction">Transactions</Link>
                 </div>
                 <div style={{ cursor: 'pointer' }} onClick={handleLogout}>
                     Log out

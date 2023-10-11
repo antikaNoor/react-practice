@@ -8,10 +8,12 @@ import Dropdown from '../../components/dropdown/dropdown'
 import useBookHook from '../../hooks/useBookHook'
 import Header from '../../components/header/header'
 import Footer from '../../components/footer/footer'
+import PriceRangeSlider from '../../components/Slider/Slider'
 
-function FetchData() {
+function AllBookList() {
     const { noBooksFound, fetchedData, currentPage, totalPages, fetchBooks, searchQuery, handleSearchQuery, sortOptionLabels, orderOptionLabels,
-        handleSortChange, handleOrderChange, orderOptions, sortOptions, selectedSortOption, selectedOrderOption } = useBookHook();
+        handleSortChange, handleOrderChange, orderOptions, sortOptions, selectedSortOption, selectedOrderOption,
+        priceRange, handlePriceChange } = useBookHook();
 
     // modal
     const [showBookModal, setShowBookModal] = useState(false)
@@ -45,6 +47,9 @@ function FetchData() {
                         selectedOption={selectedOrderOption}
                         onChange={handleOrderChange} />
                 </div>
+                <div>
+                    <PriceRangeSlider priceRange={priceRange} setPriceRange={handlePriceChange} />
+                </div>
             </div>
             {/* card and modal */}
             {noBooksFound ? (
@@ -62,4 +67,4 @@ function FetchData() {
     )
 }
 
-export default FetchData
+export default AllBookList

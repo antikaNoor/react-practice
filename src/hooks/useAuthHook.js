@@ -21,8 +21,10 @@ const useAuthHook = () => {
                 return response.data
             })
             .then((data) => {
-                alert("Sign up completed!")
-                console.log('Sign up completed!:', data);
+                dispatch(addUser(data))
+                if (data.status === false) {
+                    navigate("/login/profile");
+                }
             })
             .catch((error) => {
                 alert('Error signing up:')
@@ -47,10 +49,10 @@ const useAuthHook = () => {
                 // console.log("response - ", response.data)
                 dispatch(addUser(response.data))
                 if (response.data.status === true) {
-                    navigate("/login/add-book");
+                    navigate("/");
                 }
                 else {
-                    navigate("/login/profile");
+                    navigate("/");
                 }
             })
             .catch((error) => {

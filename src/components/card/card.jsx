@@ -4,6 +4,7 @@ import DeleteData from '../deleteData/deleteData'
 import SetInitialData from '../editData/setInititalData'
 import { axiosInstance } from '../../utils/axiosInstance'
 import { useNavigate } from 'react-router-dom'
+import RatingStar from '../../utils/RatingStars'
 
 const Card = ({ data, updateModal, setRelatedBook }) => {
     const viewButtonValue = "View"
@@ -14,19 +15,19 @@ const Card = ({ data, updateModal, setRelatedBook }) => {
             <div className="list-container">
                 {data.data.books.map((book, index) => {
                     const genre_ = book.genre.join(", ")
-                    const rating_ = book.rating
-                    const stars = []
-                    for (let i = 0; i < 5; i++) {
-                        if (i < Math.floor(rating_)) {
-                            stars.push(<i className="fa-solid fa-star" key={i}></i>)
-                        }
-                        else if (i < rating_ && i === Math.floor(rating_)) {
-                            stars.push(<i className="fa-solid fa-star-half-stroke" key={i}></i>)
-                        }
-                        else {
-                            stars.push(<i className="fa-regular fa-star" key={i}></i>);
-                        }
-                    }
+                    // const rating_ = book.rating
+                    // const stars = []
+                    // for (let i = 0; i < 5; i++) {
+                    //     if (i < Math.floor(rating_)) {
+                    //         stars.push(<i className="fa-solid fa-star" key={i}></i>)
+                    //     }
+                    //     else if (i < rating_ && i === Math.floor(rating_)) {
+                    //         stars.push(<i className="fa-solid fa-star-half-stroke" key={i}></i>)
+                    //     }
+                    //     else {
+                    //         stars.push(<i className="fa-regular fa-star" key={i}></i>);
+                    //     }
+                    // }
 
                     // DELETE
                     const handleDeleteBook = () => {
@@ -61,7 +62,7 @@ const Card = ({ data, updateModal, setRelatedBook }) => {
                         <div className='list-details'>
                             <p className='title'><b>{book.title}</b></p>
                             <p className='author'>{book.author}</p>
-                            <div className="star-container">{stars}</div>
+                            {book.rating && <RatingStar rating={book.rating} />}
                             <p className='price'>Price:  {book.price}</p>
                             <Button
                                 value={viewButtonValue}

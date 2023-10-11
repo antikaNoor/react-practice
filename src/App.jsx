@@ -11,6 +11,9 @@ import About from "./pages/About/About";
 import BookList from "./pages/BookListGeneral/BookList";
 import UserProfile from './pages/UserProfile/UserProfile'
 import UserCart from './pages/UserCart/UserCart'
+import AllUserList from "./pages/AllUserList/AllUserList";
+import AllCartsList from "./pages/AllCartsList/AllCartsList";
+import AllTransactionList from "./pages/AllTransactionList/AllTransactionList";
 
 function App() {
   console.log("this is app")
@@ -23,7 +26,11 @@ function App() {
         <Route path="view-books-general" element={<BookList />} />
         <Route path="about" element={<About />} />
         <Route element={<AdminAuthenticate />}>
+          <Route path="login/manage-book" element={<AllBooksList />} />
           <Route path="login/add-book" element={<AddBook />} />
+          <Route path="login/manage-user" element={<AllUserList />} />
+          {/* <Route path="login/show-cart" element={<AllCartsList />} /> */}
+          <Route path="login/show-transaction" element={<AllTransactionList />} />
         </Route>
         <Route element={<UserAuthenticate />}>
           <Route path="login/profile" element={<UserProfile />} />

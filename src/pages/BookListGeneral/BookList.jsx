@@ -8,15 +8,20 @@ import Dropdown from '../../components/dropdown/dropdown'
 import useBookHook from '../../hooks/useBookHook'
 import Header from '../../components/header/header'
 import Footer from '../../components/footer/footer'
+import PriceRangeSlider from '../../components/Slider/Slider'
 
 function BookList() {
 
     const { noBooksFound, fetchedData, currentPage, totalPages, fetchBooks, searchQuery, handleSearchQuery, sortOptionLabels, orderOptionLabels,
-        handleSortChange, handleOrderChange, orderOptions, sortOptions, selectedSortOption, selectedOrderOption } = useBookHook();
+        handleSortChange, handleOrderChange, orderOptions, sortOptions, selectedSortOption, selectedOrderOption,
+        priceRange, handlePriceChange } = useBookHook();
 
     // modal
     const [showBookModal, setShowBookModal] = useState(false)
     const [relatedBook, setRelatedBook] = useState([])
+
+
+
 
     //show or hide the modal
     const updateModal = () => {
@@ -45,6 +50,9 @@ function BookList() {
                         options={orderOptions}
                         selectedOption={selectedOrderOption}
                         onChange={handleOrderChange} />
+                </div>
+                <div>
+                    <PriceRangeSlider priceRange={priceRange} setPriceRange={handlePriceChange} />
                 </div>
             </div>
             {/* card and modal */}
