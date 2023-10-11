@@ -47,7 +47,7 @@ function AllBookList() {
                         selectedOption={selectedOrderOption}
                         onChange={handleOrderChange} />
                 </div>
-                <div>
+                <div className='slider-container'>
                     <PriceRangeSlider priceRange={priceRange} setPriceRange={handlePriceChange} />
                 </div>
             </div>

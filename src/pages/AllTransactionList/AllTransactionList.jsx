@@ -9,11 +9,12 @@ function AllTransactionList() {
     return (
         <>
             <Header />
-            <div>
+            <div className='user-container'>
+                <h1>Transactions</h1>
                 {allTransactions?.map((transaction, index) => (
-                    <div className='transaction-container' key={index}>
+                    <div className='user-block' key={index}>
                         <div>{transaction?.reader?.reader_name}</div>
-                        <div className='transaction-items'>
+                        <div className='user-items'>
                             {transaction?.bought_books?.map((book, innerIndex) => (
                                 <div key={innerIndex}>
                                     <div>{book?.id?.title}</div>

@@ -18,6 +18,11 @@
         align-items: center;
         // gap: 20px;
 
+        .slider-container {
+            margin-top: 30px;
+            min-width: 60px;
+        }
+
         .dropdown {
             display: grid;
             grid-template-columns: 1fr auto;

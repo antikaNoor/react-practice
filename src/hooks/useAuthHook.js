@@ -2,6 +2,7 @@ import { axiosInstance, axiosInstanceToken } from '.././utils/axiosInstance'
 import { useDispatch } from 'react-redux';
 import { addUser, logoutUser } from '../redux/Slices/UserSlice';
 import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 
 
 const useAuthHook = () => {
@@ -56,7 +57,7 @@ const useAuthHook = () => {
                 }
             })
             .catch((error) => {
-                alert('Authentication failed!')
+                swal('Authentication failed!')
                 console.error('Error logging in:', error);
             });
     }

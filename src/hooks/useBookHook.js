@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { axiosInstance } from '.././utils/axiosInstance'
+import swal from 'sweetalert'
 // import axios from 'axios'
 
 const useBookHook = () => {
@@ -124,11 +125,11 @@ const useBookHook = () => {
                 return response.data
             })
             .then((data) => {
-                alert("Book Added Successfully!")
+                swal("Book Added Successfully!")
                 console.log('Book added successfully:', data);
             })
             .catch((error) => {
-                alert('Error adding book:', error)
+                swal('Error adding book:', error)
                 console.error('Error adding book:', error);
             });
     };
@@ -150,7 +151,7 @@ const useBookHook = () => {
 
     return {
         // for fetching
-        noBooksFound, fetchedData, fetchBooks,
+        noBooksFound, fetchedData, setFetchedData, fetchBooks,
         currentPage, totalPages,
         searchQuery, handleSearchQuery,
         sortOptionLabels, orderOptionLabels, handleSortChange, handleOrderChange,

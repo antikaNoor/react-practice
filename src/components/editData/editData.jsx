@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import EditModal from '../modalComponent/editModal'
 
-function EditData({ title, author, genre, description, pages, price, stock, branches, image, editFormData, onEditChangeHandler, onEditSubmitHandler }) {
+function EditData({ title, author, genre, description, pages, price, stock, branches, image, editFormData, onEditChangeHandler, onEditSubmitHandler, handleEditBook }) {
     // const { editFormData, onEditChangeHandler, onEditSubmitHandler } = useBookHook();
 
     // modal
@@ -28,7 +28,8 @@ function EditData({ title, author, genre, description, pages, price, stock, bran
                 editFormData={editFormData}
                 onEditChangeHandler={onEditChangeHandler}
                 onEditSubmitHandler={onEditSubmitHandler}
-                editBookModal={editBookModal} />}
+                editBookModal={editBookModal}
+                handleEditBook={handleEditBook} />}
 
             <i className="fa-solid fa-pen-to-square"
                 onClick={(e) => {

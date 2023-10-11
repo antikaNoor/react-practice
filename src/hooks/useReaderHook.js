@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import swal from 'sweetalert';
 
 const useReaderHook = () => {
+  const [loading, setLoading] = useState(true);
   const [fetchedTransaction, setFetchedTransaction] = useState([]);
   const [fetchedAllUsers, setFetchedAllUsers] = useState([])
   const [allTransactions, setAllTransactions] = useState([])
@@ -164,11 +165,13 @@ const useReaderHook = () => {
 
   useEffect(() => {
     fetchTransactions();
-    getAllUser()
+    getAllUser().then(() => {
+      setLoading(false); // Data loading is complete
+    })
     getAllTransactions()
   }, []);
 
-  return { fetchedTransaction, updateBalance, fetchedAllUsers, allTransactions, onDeleteSubmitHandler, onEditSubmitHandler };
+  return { fetchedTransaction, updateBalance, fetchedAllUsers, allTransactions, onDeleteSubmitHandler, onEditSubmitHandler, loading };
 };
 
 export default useReaderHook;

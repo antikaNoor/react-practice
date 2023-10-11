@@ -1,10 +1,11 @@
 import React from 'react';
 import InputRange from 'react-input-range';
 import 'react-input-range/lib/css/index.css';
+// import './Slider.scss'
 
 const PriceRangeSlider = ({ priceRange, setPriceRange }) => {
     return (
-        <div className="price-range-slider">
+        <div className="slider">
             <label>Price Range:</label>
             <InputRange
                 maxValue={1000} // Set your maximum price value
