@@ -29,7 +29,7 @@ function UserProfile() {
 
   const onSubmitHandler = (data) => {
     console.log("Balance, ", getValues("balance"))
-    updateBalance(data)
+    updateBalance(data.balance)
   };
 
   const [relatedBook, setRelatedBook] = useState([])
@@ -50,9 +50,12 @@ function UserProfile() {
     setRelatedBook(book);
   }
 
-  useEffect(() => {
 
-  }, [relatedBook])
+
+  console.log("relatedbook from userprofile for review add", relatedBook)
+  // useEffect(() => {
+
+  // }, [relatedBook])
 
   return (
     <div>
@@ -63,6 +66,7 @@ function UserProfile() {
           <h2>User Profile</h2>
           <p>username: {user.reader_name}</p>
           <p>Email: {user.reader_email}</p>
+
           <h1 className='add-book-header'>Update Balance</h1>
           <form onSubmit={handleSubmit(onSubmitHandler)}>
             <div className='balance-container'>
@@ -97,10 +101,6 @@ function UserProfile() {
             </div>
             <Button type="submit"
               value="Update"
-              onClick={() => {
-                //api call
-                console.log("Update balance button is called.")
-              }}
             />
 
           </form>
@@ -174,7 +174,7 @@ function UserProfile() {
 
       {isModalOpen && (
         <ReviewModal
-          relatedBook={relatedBook?._id}
+          relatedBook={relatedBook?.id?._id}
           toggleModal={toggleModal}
           isEdit={isEdit}
           existingReview={existingReview}

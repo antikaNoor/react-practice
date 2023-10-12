@@ -15,7 +15,6 @@ function AllUserList() {
 
     return (
         <>
-
             <Header />
             <div className='user-container'>
                 <h1>Users</h1>

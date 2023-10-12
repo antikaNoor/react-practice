@@ -5,9 +5,9 @@ import swal from 'sweetalert'
 
 const useBookHook = () => {
     /* FUNCTIONALITY FOR FETCHING ALL BOOKS */
-
+    const [update, setUpdate] = useState(false)
     //fetch data from api
-    const [fetchedData, setFetchedData] = useState(null)
+    const [fetchedData, setFetchedData] = useState([])
     const [noBooksFound, setNoBooksFound] = useState(false);
 
     //pagination
@@ -49,16 +49,6 @@ const useBookHook = () => {
     //filter
     const [priceRange, setPriceRange] = useState({ min: 0, max: 1000 });
 
-    // const handleMinPriceChange = (e) => {
-    //     setPriceRange({ ...priceRange, min: e.target.value });
-    //     // debouncedFetchBooks(currentPage);
-    // };
-
-    // const handleMaxPriceChange = (e) => {
-    //     setPriceRange({ ...priceRange, max: e.target.value });
-    //     // debouncedFetchBooks(currentPage);
-    // };
-
     const handlePriceChange = (value) => {
         setPriceRange(value);
         // debouncedFetchBooks(currentPage);
@@ -88,6 +78,11 @@ const useBookHook = () => {
                 console.error("Other Error:", error);
             })
     }
+
+    useEffect(() => {
+        console.log("update")
+        fetchBooks(currentPage)
+    }, [update])
 
     useEffect(() => {
         const timeOutFunc = setTimeout(() => {
@@ -146,6 +141,7 @@ const useBookHook = () => {
     }
 
     const refetchBooks = () => {
+        console.log("refetch")
         fetchBooks(currentPage);
     };
 
@@ -158,7 +154,7 @@ const useBookHook = () => {
         orderOptions, sortOptions, selectedSortOption, selectedOrderOption,
         // for adding book
         formData, onChangeHandler, refetchBooks, handleAddBook,
-        priceRange, handlePriceChange
+        priceRange, handlePriceChange, setUpdate, update
     }
 }
 

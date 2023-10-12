@@ -32,7 +32,7 @@ const cartReducer = createSlice({
                 });
             }
         },
-        clearCart: () => [], // Clear the cart by returning an empty array
+        clearCart: () => [],
     },
 });
 

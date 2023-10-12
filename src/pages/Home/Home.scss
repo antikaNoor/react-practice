@@ -31,7 +31,7 @@
             justify-content: center;
             align-items: center;
             padding: 40px;
-            margin-top: 160px;
+            margin-top: 50px;
 
             // grid-template-columns: repeat(1, 1fr);
             // gap: 20px;
@@ -63,10 +63,6 @@
                 text-decoration: none;
                 transition: 0.7s background-color, 0.3s color;
 
-                .link {
-                    text-decoration: none;
-                    color: $lightColor;
-                }
             }
 
             .btn:hover {

@@ -16,7 +16,7 @@ function Home() {
         <div className="container">
           <div className='topnav-container'>
             <Header />
-            <AuthSection/>
+            <AuthSection />
           </div>
           <div className="welcome">
             <h1 className="heading">Once Upon A Time</h1>
@@ -24,7 +24,6 @@ function Home() {
             <button className="btn" onClick={() => {
               navigate('/view-books-general')
             }}>Explore
-              {/* <Link className='link' to='/fetch'>Explore</Link> */}
             </button>
           </div>
         </div>

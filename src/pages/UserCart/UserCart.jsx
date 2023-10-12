@@ -6,10 +6,12 @@ import Header from '../../components/header/header'
 import useCartHook from '../../hooks/useCartHook'
 import './UserCart.scss'
 import { PiPlusSquareFill, PiMinusSquareFill } from 'react-icons/pi'
+import useReaderHook from '../../hooks/useReaderHook';
 
 function UserCart() {
     const dispatch = useDispatch();
     const { fetchedCart, handleAddToCart, handleDeleteFromCart, handleCheckout } = useCartHook()
+    const { balance } = useReaderHook()
 
     const [relatedBook, setRelatedBook] = useState([])
     const [quantity, setQuantity] = useState(null)
@@ -44,41 +46,49 @@ function UserCart() {
     return (
         <>
             <Header />
+            <h2>Your Cart</h2>
+
             <div className='cart-container'>
-                <h2>Your Cart</h2>
+
 
                 {fetchedCart?.bought_books?.map((book) => {
 
                     return (
-                        <div className='info-container'>
-                            <div>Title: {book.id.title}</div>
-                            <div>Unit price: {book.id.price}</div>
-                            <div>Total price: {book.id.price * book.quantity}</div>
-                            <div className='quantity-container'>
-                                <PiPlusSquareFill
-                                    style={{ fontSize: '24px' }}
-                                    onClick={() => {
-                                        setRelatedBook(book)
-                                        setQuantity(book.quantity++)
-                                        setCount(count + 1)
+                        <div className='card'>
+                            <div className='img-container'>
+                                <img src={book.id.image}></img>
+                            </div>
+                            <div className='info'>
+                                <div className='title'>Title: {book.id.title}</div>
+                                <div className='author'>Author: {book.id.author}</div>
+                                <div className='price'>Unit price: {book.id.price}</div>
+                                <div className='price'>Total price: {book.id.price * book.quantity}</div>
+                                <div className='quantity-container'>
+                                    <PiPlusSquareFill
+                                        style={{ fontSize: '24px' }}
+                                        onClick={() => {
+                                            setRelatedBook(book)
+                                            setQuantity(book.quantity++)
+                                            setCount(count + 1)
 
-                                    }}
-                                />
-                                <div>Quantity: {book.quantity}</div>
-                                <PiMinusSquareFill
-                                    style={{ fontSize: '24px' }}
-                                    onClick={() => {
-                                        setRelatedBook(book)
-                                        setQuantity(book.quantity--)
-                                        setCount(count + 1)
-                                    }}
-                                />
-                                <Button type='submit'
-                                    value='Update'
-                                    onClick={() => {
-                                        handleAdd()
-                                    }}
-                                />
+                                        }}
+                                    />
+                                    <div>Quantity: {book.quantity}</div>
+                                    <PiMinusSquareFill
+                                        style={{ fontSize: '24px' }}
+                                        onClick={() => {
+                                            setRelatedBook(book)
+                                            setQuantity(book.quantity--)
+                                            setCount(count + 1)
+                                        }}
+                                    />
+                                    <Button type='submit'
+                                        value='Update'
+                                        onClick={() => {
+                                            handleAdd()
+                                        }}
+                                    />
+                                </div>
                             </div>
                         </div>
                     )
@@ -86,6 +96,10 @@ function UserCart() {
 
                 {fetchedCart &&
                     <div>Subtotal: {fetchedCart?.total_spent}</div>
+                }
+
+                {balance &&
+                    <div>Your Balance: {balance?.balance}</div>
                 }
             </div>
             <div className='checkout-container'>

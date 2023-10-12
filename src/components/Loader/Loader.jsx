@@ -14,12 +14,13 @@ function LoaderComponent() {
     }, []);
 
     return (
-        <div className="loader-container">
-            {loading && <div className="loader"></div>}
-            {!loading && <div>Content Loaded!</div>}
-
-
+        <div class="loader">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
         </div>
+
     );
 }
 

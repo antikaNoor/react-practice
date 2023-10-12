@@ -21,7 +21,7 @@ function ReviewModal({ toggleModal, relatedBook, isEdit, existingReview, titleTe
             text: ''
         }
     });
-    console.log("relatedBook", relatedBook)
+    console.log("relatedBook from modal", relatedBook)
 
     const [formData, setFormData] = useState({
         rating: existingReview ? existingReview.rating : 0,

@@ -4,6 +4,8 @@ import jwt_decode from "jwt-decode";
 import useAuthHook from '../../hooks/useAuthHook';
 import { PiShoppingCartFill, PiHeartStraightFill } from 'react-icons/pi'
 import { useSelector } from 'react-redux';
+import { GiSecretBook } from 'react-icons/gi'
+import { ImBook } from 'react-icons/im'
 
 /* There are 3 cases here - 
 1. a general header
@@ -20,6 +22,9 @@ const Header = () => {
     if (!check || !check.token) {
         return (
             <div className="header-container">
+                <div>
+                    <Link className='link' to="/"><ImBook /></Link>
+                </div>
                 <div>
                     <Link className='link' to="/">Home</Link>
                 </div>
@@ -41,6 +46,9 @@ const Header = () => {
         return (
             <div className="header-container">
                 <div>
+                    <Link className='link1' to="/"><ImBook /></Link>
+                </div>
+                <div>
                     <Link className='link' to="/">Home</Link>
                 </div>
                 <div>
@@ -52,9 +60,6 @@ const Header = () => {
                 <div>
                     <Link className='link' to="/login/manage-user">Manage Users</Link>
                 </div>
-                {/* <div>
-                    <Link className='link' to="/login/show-cart">Carts</Link>
-                </div> */}
                 <div>
                     <Link className='link' to="/login/show-transaction">Transactions</Link>
                 </div>
@@ -68,19 +73,22 @@ const Header = () => {
         return (
             <div className="header-container">
                 <div>
+                    <Link className='link1' to="/"><ImBook /></Link>
+                </div>
+                <div>
                     <Link className='link' to="/">Home</Link>
                 </div>
                 <div>
-                    <Link className='link' to="/">Books</Link>
+                    <Link className='link' to="/view-books-general">Books</Link>
                 </div>
                 <div>
                     <Link className='link' to="/login/profile">Profile</Link>
                 </div>
-                <img
+                {/* <img
                     src={`https://robohash.org/${user.reader_email}?size=45x45`}
                     alt=""
                     className="userImgCircle"
-                />
+                /> */}
                 <div>
                     <PiShoppingCartFill
                         title="Your Cart"
@@ -89,9 +97,6 @@ const Header = () => {
                             navigate("/login/cart")
                         }}
                     />
-                </div>
-                <div>
-                    <PiHeartStraightFill title="Your Favorites" style={{ fontSize: '24px' }} />
                 </div>
                 <div style={{ cursor: 'pointer' }} onClick={handleLogout}>
                     Log out

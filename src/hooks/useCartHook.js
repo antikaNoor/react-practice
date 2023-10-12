@@ -9,8 +9,6 @@ const useCartHook = () => {
     const checkString = localStorage.getItem("user");
     const check = JSON.parse(checkString)
     const dispatch = useDispatch();
-    const navigate = useNavigate();
-
 
     const handleAddToCart = async (bought_books) => {
         console.log("user id", user.reader);

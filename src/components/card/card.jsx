@@ -5,29 +5,22 @@ import SetInitialData from '../editData/setInititalData'
 import { axiosInstance } from '../../utils/axiosInstance'
 import { useNavigate } from 'react-router-dom'
 import RatingStar from '../../utils/RatingStars'
+import useBookHook from '../../hooks/useBookHook'
+import { useEffect } from 'react'
 
 const Card = ({ data, updateModal, setRelatedBook }) => {
     const viewButtonValue = "View"
     const navigate = useNavigate()
 
+    useEffect(() => {
+        console.log("fetchedData", data)
+    }, [data])
+
     return (
         <div className="card-container">
             <div className="list-container">
-                {data.data.books.map((book, index) => {
+                {data?.data?.books?.map((book, index) => {
                     const genre_ = book.genre.join(", ")
-                    // const rating_ = book.rating
-                    // const stars = []
-                    // for (let i = 0; i < 5; i++) {
-                    //     if (i < Math.floor(rating_)) {
-                    //         stars.push(<i className="fa-solid fa-star" key={i}></i>)
-                    //     }
-                    //     else if (i < rating_ && i === Math.floor(rating_)) {
-                    //         stars.push(<i className="fa-solid fa-star-half-stroke" key={i}></i>)
-                    //     }
-                    //     else {
-                    //         stars.push(<i className="fa-regular fa-star" key={i}></i>);
-                    //     }
-                    // }
 
                     // DELETE
                     const handleDeleteBook = () => {

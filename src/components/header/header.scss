@@ -1,28 +1,29 @@
-@import '../../utils/colors.scss';
-
-* {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    box-sizing: border-box;
-}
+@import "../../utils/colors.scss";
 
 .header-container {
     background-color: $lightColor;
     color: $darkColor;
     font-size: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+    display: grid;
+    grid-template-columns: 1fr auto auto auto auto auto auto auto;
+    gap: 40px;
     align-items: center;
-    gap: 30px;
     padding: 18px 90px;
     position: sticky;
     top: 0;
     z-index: 5;
-    // box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+    .link1 {
+        grid-column: 1;
+        text-decoration: none;
+        color: $darkColor;
+        font-size: 24px;
+    }
 
     .link {
         text-decoration: none;
         color: $darkColor;
+        margin: 0 15px;
     }
 
     .userImgCircle {

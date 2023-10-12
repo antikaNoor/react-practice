@@ -7,9 +7,7 @@ const Card = ({ data, updateModal, setRelatedBook }) => {
     return (
         <div className="card-container">
             <div className="list-container">
-                {data.data.books.map((book, index) => {
-                    // console.log("boooook",book)
-                    // dispatchEvent(addToCart(book))
+                {data?.data?.books?.map((book, index) => {
                     const genre_ = book.genre.join(", ")
                     return <div key={index} className='list-items'>
                         <div className='image-container'>
