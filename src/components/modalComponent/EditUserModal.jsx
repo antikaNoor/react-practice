@@ -2,8 +2,9 @@ import React from 'react';
 // import './editUserModal.scss';
 import Button from '../button/button';
 import { useForm, Controller } from 'react-hook-form';
+import useReaderHook from '../../hooks/useReaderHook';
 
-function EditUserModal({ readerId, reader_name, status, onEditSubmitHandler, editUserModal }) {
+function EditUserModal({ readerId, reader_name, status, editUserModal }) {
     const { handleSubmit,
         control,
         formState: { errors },
@@ -15,14 +16,18 @@ function EditUserModal({ readerId, reader_name, status, onEditSubmitHandler, edi
         },
     });
 
+    const { handleEditUser } = useReaderHook();
+
     const onSubmitHandler = (data) => {
         console.log("reader_name ", getValues("reader_name"))
         // Call the update function with the updated data
-        onEditSubmitHandler(readerId, data);
+        // onEditSubmitHandler(readerId, data);
         // Close the modal
+        handleEditUser(readerId, data)
         editUserModal();
     };
 
+    console.log("readerid from editModal", readerId)
     return (
         <div className="bookModal-container">
             <div className="bookModal-item">

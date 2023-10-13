@@ -15,7 +15,7 @@ const useReaderHook = () => {
   const check = JSON.parse(checkString)
   const { readerId } = useParams();
 
-  console.log("param from hook", readerId)
+  // console.log("param from hook", readerId)
 
   const fetchTransactions = async () => {
     // Fetch data from API with custom headers
@@ -129,14 +129,14 @@ const useReaderHook = () => {
         return response.data
       })
       .then((data) => {
-        swal("Book Deleted Successfully!")
-        console.log('Book deleted successfully:', data);
+        swal("Reader Deleted Successfully!")
+        console.log('Reader deleted successfully:', data);
       })
       .catch((error) => {
         if (error.response.data.success === false) {
           swal(error.response.data.message);
         }
-        console.error('Error deleting book:', error.response.data.success);
+        console.error('Error deleting Reader:', error.response.data.success);
       });
   };
 
@@ -167,15 +167,13 @@ const useReaderHook = () => {
       });
   };
 
-  const onEditSubmitHandler = (readerId) => {
-    handleEditUser(readerId)
-  }
+  // const onEditSubmitHandler = (readerId) => {
+  //   handleEditUser(readerId)
+  // }
 
   const onDeleteSubmitHandler = (readerId) => {
-    // e.preventDefault();
     //api
     handleDeleteUser(readerId);
-    // window.location.reload();
   };
 
   const getAllTransactions = async () => {
@@ -207,7 +205,7 @@ const useReaderHook = () => {
 
   return {
     fetchedTransaction, balance, updateBalance, fetchedAllUsers,
-    allTransactions, onDeleteSubmitHandler, onEditSubmitHandler, loading
+    allTransactions, onDeleteSubmitHandler, loading, handleEditUser, handleDeleteUser
   };
 };
 

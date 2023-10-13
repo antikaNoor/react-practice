@@ -12,6 +12,8 @@ const Card = ({ data, updateModal, setRelatedBook }) => {
     const viewButtonValue = "View"
     const navigate = useNavigate()
 
+    const { refetchBooks, currentPage } = useBookHook()
+
     useEffect(() => {
         console.log("fetchedData", data)
     }, [data])
@@ -34,17 +36,19 @@ const Card = ({ data, updateModal, setRelatedBook }) => {
                                 return response.data
                             })
                             .then((data) => {
-                                alert("Book Deleted Successfully!")
-                                navigate('/view-books')
+                                swal("Book Deleted Successfully!")
+                                // navigate('/view-books')
+                                // setUpdate(update => !update);
                                 console.log('Book deleted successfully:', data);
                             })
                             .catch((error) => {
                                 console.error('Error deleting book:', error);
                             });
                     };
-                    const onDeleteSubmitHandler = (e) => {
-                        e.preventDefault();
-                        handleDeleteBook();
+                    const onDeleteSubmitHandler = async () => {
+                        // e.preventDefault();
+                        await handleDeleteBook();
+                        await refetchBooks(currentPage)
                         // window.location.reload();
                     };
 

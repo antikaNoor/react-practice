@@ -72,15 +72,16 @@ const useBookHook = () => {
 
             })
             .catch((error) => {
+                swal(error.response.data.message);
                 // Handle other errors (network error, timeout, etc.) here.
                 console.error("Other Error:", error);
             })
     }
 
-    useEffect(() => {
-        console.log("update")
-        fetchBooks(currentPage)
-    }, [update])
+    // useEffect(() => {
+    //     console.log("update")
+    //     fetchBooks(currentPage)
+    // }, [update])
 
     useEffect(() => {
         const timeOutFunc = setTimeout(() => {
@@ -134,12 +135,17 @@ const useBookHook = () => {
         setFormData({ ...formData, [name]: value });
     }
 
-    const refetchBooks = () => {
-        setTimeout(() => {
+    const refetchBooks = (currentPage) => {
+        const timeOutFunc = setTimeout(() => {
             console.log("refetch")
             fetchBooks(currentPage);
-        }, 2000);
+        }, 3000);
+        return () => clearTimeout(timeOutFunc);
     };
+
+    useEffect(() => {
+        refetchBooks(currentPage)
+    }, [update, currentPage])
 
     return {
         // for fetching

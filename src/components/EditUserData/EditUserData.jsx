@@ -8,6 +8,7 @@ function EditUserData({ readerId, reader_name, status, onEditSubmitHandler }) {
         setIsModalOpen(!isModalOpen);
     };
 
+    console.log("readerid from editdata", readerId)
     return (
         <>
             {isModalOpen && (

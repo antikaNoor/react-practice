@@ -7,7 +7,7 @@ import useBookHook from '../../hooks/useBookHook'
 
 function setInititalData({ bookId, title, author, genre, description, pages, price, stock, branch, image }) {
 
-    const { fetchedData, setFetchedData, setUpdate, update, refetchBooks, currentPage } = useBookHook()
+    const { fetchedData, update, setUpdate, setFetchedData, refetchBooks, currentPage } = useBookHook()
     //set the form data for edit
     const [editFormData, setEditFormData] = useState({
         title,
@@ -20,6 +20,7 @@ function setInititalData({ bookId, title, author, genre, description, pages, pri
         branch,
         image
     })
+
 
     const onEditChangeHandler = (e) => {
         // getting name and value pair from frontend
@@ -39,9 +40,8 @@ function setInititalData({ bookId, title, author, genre, description, pages, pri
                 }
                 return response.data
             })
-            .then((data) => {
+            .then(async (data) => {
                 swal("Book Edited Successfully!")
-                setUpdate(!update)
                 // await setFetchedData(fetchedData)
                 console.log('Book edited successfully:', data);
             })
@@ -50,15 +50,10 @@ function setInititalData({ bookId, title, author, genre, description, pages, pri
             });
     };
     const onEditSubmitHandler = async () => {
-        // e.preventDefault();
         await handleEditBook(editFormData);
-        refetchBooks(currentPage)
-        // window.location.reload();
+        // await setUpdate(!update);
+        await refetchBooks(currentPage)
     };
-
-    useEffect(() => {
-        setFetchedData(fetchedData)
-    }, [fetchedData])
 
     return (
         <EditData title={editFormData.title}

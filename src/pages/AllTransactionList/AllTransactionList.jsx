@@ -22,13 +22,13 @@ function AllTransactionList() {
                                     </div>
                                     <div className='info'>
                                         <h4>Book</h4>
-                                    <div>{book?.id?.title}</div>
-                                    <div>{book?.id?.author}</div>
+                                        <div>{book?.id?.title}</div>
+                                        <div>{book?.id?.author}</div>
                                     </div>
                                 </div>
                             ))}
                         </div>
-                        <div><h4>Total spent: </h4>{transaction?.total_spent}</div>
+                        <div className='price'><h4>Total spent: </h4>{transaction?.total_spent}</div>
                         <div>{transaction?.date}</div>
                     </div>
                 ))}
