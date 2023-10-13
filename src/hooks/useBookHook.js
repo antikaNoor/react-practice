@@ -68,8 +68,6 @@ const useBookHook = () => {
                     setTotalPages(Math.ceil(data.data.totalRecords / 6));
                     setCurrentPage(page);
                     setFetchedData(data)
-                    // console.log("dataaa", data)
-                    // dispatch(addToCart(response.data))
                 }
 
             })
@@ -129,10 +127,6 @@ const useBookHook = () => {
             });
     };
 
-    // const onSubmitHandler = () => {
-    //     handleAddBook(formData);
-    // };
-
     const onChangeHandler = (e) => {
         // getting name and value pair from frontend
         const { name, value } = e.target
@@ -141,8 +135,10 @@ const useBookHook = () => {
     }
 
     const refetchBooks = () => {
-        console.log("refetch")
-        fetchBooks(currentPage);
+        setTimeout(() => {
+            console.log("refetch")
+            fetchBooks(currentPage);
+        }, 2000);
     };
 
     return {

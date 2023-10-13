@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addBookToCart, clearCart } from '../redux/Slices/CartSlice';
 import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 
 const useCartHook = () => {
     const user = useSelector((state) => state.user);
@@ -29,7 +30,7 @@ const useCartHook = () => {
             if (response.status === 200) {
                 dispatch(clearCart());
 
-                alert("Successfully added to cart!");
+                swal("Successfully added to cart!");
                 console.log('Successfully added to cart!', response.data);
             } else {
                 // Handle non-200 status code here if necessary
@@ -37,7 +38,7 @@ const useCartHook = () => {
                 console.error(`HTTP error! status: ${response.status}`);
             }
         } catch (error) {
-            alert('Error adding to cart');
+            swal(error.response.data.message)
             console.error('Error adding to cart:', error);
         }
     };
@@ -78,7 +79,7 @@ const useCartHook = () => {
             if (response.status === 200) {
                 dispatch(clearCart());
 
-                alert("Successfully removed from cart!");
+                swal("Successfully removed from cart!");
                 console.log('Successfully removed from cart!', response.data);
             } else {
                 // Handle non-200 status code here if necessary
@@ -86,7 +87,7 @@ const useCartHook = () => {
                 console.error(`HTTP error! status: ${response.status}`);
             }
         } catch (error) {
-            alert('Error removing from cart');
+            swal(error.response.data.message)
             console.error('Error removing from cart:', error);
         }
     }
@@ -105,14 +106,14 @@ const useCartHook = () => {
 
             if (response.status === 200) {
 
-                alert("Successfully checked out from cart!");
+                swal("Successfully checked out from cart!");
                 console.log('Successfully checked out from cart!', response.data);
             } else {
                 alert("Something went wrong.");
                 console.error(`HTTP error! status: ${response.status}`);
             }
         } catch (error) {
-            alert('Error checked out from cart');
+            swal(error.response.data.message)
             console.error('Error checked out from cart:', error);
         }
     }

@@ -2,10 +2,13 @@ import React from 'react'
 import './bookModal.scss'
 import Form from '../form/form'
 import Button from '../button/button'
+import useBookHook from '../../hooks/useBookHook'
 
 function EditModal({ editBookModal, title, author, genre,
     description, pages, price, stock, branches, image,
     onEditChangeHandler, onEditSubmitHandler }) {
+
+    const { refetchBooks, currentPage } = useBookHook()
     return (
         <div className='bookModal-container'>
             <div className='bookModal-item'>
@@ -99,7 +102,10 @@ function EditModal({ editBookModal, title, author, genre,
                     </div>
                     <Button type='submit'
                         value='Submit'
-                        onClick={onEditSubmitHandler} />
+                        onClick={() => {
+                            onEditSubmitHandler()
+                            refetchBooks(currentPage)
+                        }} />
                 </div>
             </div>
         </div>

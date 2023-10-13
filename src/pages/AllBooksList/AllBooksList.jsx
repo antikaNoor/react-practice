@@ -36,6 +36,8 @@ function AllBookList() {
                     value={searchQuery}
                     onChange={handleSearchQuery} />
                 <div className='dropdown'>
+                <PriceRangeSlider priceRange={priceRange} setPriceRange={handlePriceChange} />
+
                     <Dropdown title="Sort by"
                         labels={[...sortOptionLabels]}
                         options={sortOptions}
@@ -47,9 +49,9 @@ function AllBookList() {
                         selectedOption={selectedOrderOption}
                         onChange={handleOrderChange} />
                 </div>
-                <div className='slider-container'>
+                {/* <div className='slider-container'>
                     <PriceRangeSlider priceRange={priceRange} setPriceRange={handlePriceChange} />
-                </div>
+                </div> */}
             </div>
             {/* card and modal */}
             {noBooksFound ? (

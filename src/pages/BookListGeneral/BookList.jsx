@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import UserCard from '../../components/UserCard/UserCard'
-// import './AllBooksList.scss'
+import '../AllBooksList/AllBooksList.scss'
 import SearchBar from '../../components/searchBar/searchBar'
 import Pagination from '../../components/pagination/pagination'
 import BookModal from '../../components/modalComponent/bookModal'
@@ -35,11 +35,14 @@ function BookList() {
             {showBookModal && <BookModal updateModal={updateModal} relatedBook={relatedBook} />}
             {/* searching */}
             <div className='search-book'>
+
                 <SearchBar type='text'
                     placeholder='Search by title, author, or genre...'
                     value={searchQuery}
                     onChange={handleSearchQuery} />
                 <div className='dropdown'>
+                <PriceRangeSlider priceRange={priceRange} setPriceRange={handlePriceChange} />
+
                     <Dropdown title="Sort by"
                         labels={[...sortOptionLabels]}
                         options={sortOptions}
@@ -50,9 +53,6 @@ function BookList() {
                         options={orderOptions}
                         selectedOption={selectedOrderOption}
                         onChange={handleOrderChange} />
-                </div>
-                <div>
-                    <PriceRangeSlider priceRange={priceRange} setPriceRange={handlePriceChange} />
                 </div>
             </div>
             {/* card and modal */}

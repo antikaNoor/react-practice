@@ -13,6 +13,9 @@ const useReaderHook = () => {
   const [balance, setBalance] = useState([])
   const checkString = localStorage.getItem("user");
   const check = JSON.parse(checkString)
+  const { readerId } = useParams();
+
+  console.log("param from hook", readerId)
 
   const fetchTransactions = async () => {
     // Fetch data from API with custom headers
@@ -190,6 +193,7 @@ const useReaderHook = () => {
       })
       .catch((error) => {
         // Handle other errors (network error, timeout, etc.) here.
+        // swal(error.response.data.message)
         console.error("Other Error:", error);
       })
   }

@@ -1,13 +1,18 @@
 @import '../../utils/colors.scss';
 
 .user-container {
-    margin-top: 50px;
+    padding-top: 50px;
     display: grid;
     // grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 20px;
-    padding: 20px;
+    padding: 50px;
     justify-content: center;
-    // align-items: center;
+    align-items: center;
+    background-color: $medColor;
+
+    .heading {
+        text-align: center;
+    }
 
     .spinner-container {
         display: flex;
@@ -22,10 +27,10 @@
         min-width: fit-content;
         display: flex;
         flex-direction: row;
-        background-color: #E6E9ED;
+        background-color: $lightColor;
         border-radius: 60px;
-        padding: 15px 100px;
-        gap: 120px;
+        padding: 15px 150px;
+        gap: 190px;
 
         .user-items {
             display: flex;

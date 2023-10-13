@@ -7,7 +7,7 @@ import useReviewHook from '../../hooks/useReviewHook'
 
 function ReviewModal({ toggleModal, relatedBook, isEdit, existingReview, titleText }) {
 
-    const { addReview, fetchReview, editReview } = useReviewHook()
+    const { addReview, fetchedReview, editReview,fetchReviewApi } = useReviewHook()
 
     const {
         handleSubmit,
@@ -43,13 +43,15 @@ function ReviewModal({ toggleModal, relatedBook, isEdit, existingReview, titleTe
             console.log("Form is submitted ");
             console.log("The rating ", getValues("rating"));
             console.log("The text ", getValues("text"));
-            addReview(data)
+            addReview(relatedBook, getValues("rating"), getValues("text"))
+            fetchReviewApi()
         }
         else {
             // console.log("Form is submitted ");
             console.log("The rating ", getValues("rating"));
             console.log("The text ", getValues("text"));
-            editReview(data)
+            editReview(existingReview?.book, getValues("rating"), getValues("text"))
+            fetchReviewApi()
         }
     };
     // useEffect(() => {
@@ -62,7 +64,9 @@ function ReviewModal({ toggleModal, relatedBook, isEdit, existingReview, titleTe
                     toggleModal()
                 }}></i>
 
+
                 <div className='add-book-container'>
+                    {/* {JSON.stringify(existingReview.book)} */}
                     <h1 className='add-book-header'>{titleText}</h1>
                     <form onSubmit={handleSubmit(onSubmitHandler)}>
                         <div className='review-container'>
@@ -73,12 +77,12 @@ function ReviewModal({ toggleModal, relatedBook, isEdit, existingReview, titleTe
                                     control={control}
                                     rules={{
                                         pattern: {
-                                            value: /^[1-5](\.[0-9]+)?$/,
+                                            value: /^[0-5](\.[0-9]+)?$/,
                                             message: "Invalid rating format",
                                         },
                                         min: {
-                                            value: 1.0,
-                                            message: 'Minimum rating is 1',
+                                            value: 0.0,
+                                            message: 'Minimum rating is 0',
                                         },
                                         max: {
                                             value: 5.0,
@@ -121,17 +125,17 @@ function ReviewModal({ toggleModal, relatedBook, isEdit, existingReview, titleTe
                         </div>
                         <Button type="submit"
                             value="Add"
-                            onClick={() => {
-                                //api call
-                                if (!isEdit) {
-                                    console.log("relatedBook from modal", isEdit)
-                                    addReview(relatedBook, getValues("rating"), getValues("text"))
-                                }
-                                else {
-                                    console.log("relatedBook from modal", relatedBook)
-                                    editReview(relatedBook, getValues("rating"), getValues("text"))
-                                }
-                            }}
+                            // onClick={() => {
+                            //     //api call
+                            //     if (!isEdit) {
+                            //         console.log("relatedBook from modal", isEdit)
+                            //         addReview(relatedBook, getValues("rating"), getValues("text"))
+                            //     }
+                            //     else {
+                            //         console.log("relatedBook from modal", relatedBook)
+                            //         editReview(relatedBook, getValues("rating"), getValues("text"))
+                            //     }
+                            // }}
                         />
 
                     </form>

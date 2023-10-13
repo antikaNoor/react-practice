@@ -12,17 +12,23 @@ function AllTransactionList() {
             <div className='user-container'>
                 <h1>Transactions</h1>
                 {allTransactions?.map((transaction, index) => (
-                    <div className='user-block' key={index}>
-                        <div>{transaction?.reader?.reader_name}</div>
+                    <div className='trans-user-block' key={index}>
+                        <div><h4>Name: </h4>{transaction?.reader?.reader_name}</div>
                         <div className='user-items'>
                             {transaction?.bought_books?.map((book, innerIndex) => (
-                                <div key={innerIndex}>
+                                <div className='trans-card' key={innerIndex}>
+                                    <div className='trans-img-container'>
+                                        <img src={book?.id?.image}></img>
+                                    </div>
+                                    <div className='info'>
+                                        <h4>Book</h4>
                                     <div>{book?.id?.title}</div>
                                     <div>{book?.id?.author}</div>
+                                    </div>
                                 </div>
                             ))}
                         </div>
-                        <div>{transaction?.total_spent}</div>
+                        <div><h4>Total spent: </h4>{transaction?.total_spent}</div>
                         <div>{transaction?.date}</div>
                     </div>
                 ))}

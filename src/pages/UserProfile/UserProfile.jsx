@@ -5,15 +5,24 @@ import { useSelector } from 'react-redux';
 import Header from '../../components/header/header';
 import useReaderHook from '../../hooks/useReaderHook';
 import useReviewHook from '../../hooks/useReviewHook';
+import useAuthHook from '../../hooks/useAuthHook';
 import { useForm, Controller } from 'react-hook-form';
 import ReviewModal from '../../components/modalComponent/ReviewModal';
 import Button from '../../components/button/button';
+import jwt_decode from "jwt-decode";
+import Footer from '../../components/footer/footer'
 
 function UserProfile() {
   const { fetchedTransaction, updateBalance } = useReaderHook();
   const { fetchedReview } = useReviewHook()
   const boughtBooks = fetchedTransaction ? fetchedTransaction.bought_books : [];
+
   const user = useSelector((state) => state.user);
+  const { handleLogout } = useAuthHook()
+  const checkString = localStorage.getItem("user");
+  const check = JSON.parse(checkString)
+
+
 
   const {
     handleSubmit,
@@ -63,15 +72,14 @@ function UserProfile() {
 
       <div className='profile-container'>
         <div className='reader-info-container'>
-          <h2>User Profile</h2>
+          <h1>User Profile</h1>
           <p>username: {user.reader_name}</p>
           <p>Email: {user.reader_email}</p>
 
-          <h1 className='add-book-header'>Update Balance</h1>
+          <h2 className='update-balance-header'>Update Balance</h2>
           <form onSubmit={handleSubmit(onSubmitHandler)}>
             <div className='balance-container'>
               <div className='form-items'>
-                <h4>Update balance</h4>
                 <Controller
                   name="balance"
                   control={control}
@@ -112,9 +120,14 @@ function UserProfile() {
             bookInfo?.bought_books?.map((book, innerIndex) => {
               return (
                 <div className='transaction-items' key={innerIndex}>
-                  <div>{book?.id?.title}</div>
-                  <div>{book?.id?.author}</div>
-                  <div>{book?.id?.genre}</div>
+                  <div className='trans-img-container'>
+                    <img src={book?.id?.image}></img>
+                  </div>
+                  <div className='info'>
+                    <div className='title'>{book?.id?.title}</div>
+                    <div className='author'>{book?.id?.author}</div>
+                    <div className='genre'>{book?.id?.genre}</div>
+                  </div>
 
                   <div>
                     <Button
@@ -135,14 +148,19 @@ function UserProfile() {
           ))}
         </div>
 
-        <div className='review-container'>
+        <div className='transaction-container'>
           <h2>Your Reviews</h2>
           {fetchedReview?.map((review, index) => {
             return (
-              <div className='review-items' key={index}>
-                <div>{review?.book?.title}</div>
-                <div>{review?.rating}</div>
-                <div>{review?.text}</div>
+              <div className='transaction-items' key={index}>
+                <div className='trans-img-container'>
+                  <img src={review?.book?.image}></img>
+                </div>
+                <div className='info'>
+                  <div className='title'>{review?.book?.title}</div>
+                  <div className='rating'>Rating: {review?.rating}</div>
+                  <div className='rev'>{review?.text}</div>
+                </div>
 
                 <div>
                   <Button
@@ -156,6 +174,7 @@ function UserProfile() {
                       toggleModal();
                       handleSetRelatedBook(review?.book)
                       const existingReview = {
+                        book: review?.book?._id,
                         rating: review?.rating,
                         text: review?.text,
                       };
@@ -181,6 +200,7 @@ function UserProfile() {
           titleText={isEdit ? "Edit Review" : "Add Review"}
         />
       )}
+      <Footer/>
     </div>
   );
 

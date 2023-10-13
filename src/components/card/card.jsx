@@ -45,7 +45,7 @@ const Card = ({ data, updateModal, setRelatedBook }) => {
                     const onDeleteSubmitHandler = (e) => {
                         e.preventDefault();
                         handleDeleteBook();
-                        window.location.reload();
+                        // window.location.reload();
                     };
 
                     return <div key={index} className='list-items'>

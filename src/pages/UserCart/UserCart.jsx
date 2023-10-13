@@ -7,6 +7,7 @@ import useCartHook from '../../hooks/useCartHook'
 import './UserCart.scss'
 import { PiPlusSquareFill, PiMinusSquareFill } from 'react-icons/pi'
 import useReaderHook from '../../hooks/useReaderHook';
+import Footer from '../../components/footer/footer';
 
 function UserCart() {
     const dispatch = useDispatch();
@@ -46,7 +47,7 @@ function UserCart() {
     return (
         <>
             <Header />
-            <h2>Your Cart</h2>
+            <h2 style={{textAlign: "center", marginTop: "20px"}}>Your Cart</h2>
 
             <div className='cart-container'>
 
@@ -83,9 +84,15 @@ function UserCart() {
                                         }}
                                     />
                                     <Button type='submit'
-                                        value='Update'
+                                        value='Increase'
                                         onClick={() => {
                                             handleAdd()
+                                        }}
+                                    />
+                                    <Button type='submit'
+                                        value='Decrease'
+                                        onClick={() => {
+                                            handleDelete()
                                         }}
                                     />
                                 </div>
@@ -101,8 +108,7 @@ function UserCart() {
                 {balance &&
                     <div>Your Balance: {balance?.balance}</div>
                 }
-            </div>
-            <div className='checkout-container'>
+                <div className='checkout-container'>
                 <Button
                     type='submit'
                     value='Checkout'
@@ -113,6 +119,8 @@ function UserCart() {
                     }}
                 />
             </div>
+            </div>
+            <Footer/>
         </>
     )
 }

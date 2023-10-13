@@ -7,7 +7,7 @@ import useBookHook from '../../hooks/useBookHook'
 
 function setInititalData({ bookId, title, author, genre, description, pages, price, stock, branch, image }) {
 
-    const { fetchedData, setFetchedData, setUpdate, update, refetchBooks } = useBookHook()
+    const { fetchedData, setFetchedData, setUpdate, update, refetchBooks, currentPage } = useBookHook()
     //set the form data for edit
     const [editFormData, setEditFormData] = useState({
         title,
@@ -42,7 +42,6 @@ function setInititalData({ bookId, title, author, genre, description, pages, pri
             .then((data) => {
                 swal("Book Edited Successfully!")
                 setUpdate(!update)
-                refetchBooks()
                 // await setFetchedData(fetchedData)
                 console.log('Book edited successfully:', data);
             })
@@ -50,9 +49,10 @@ function setInititalData({ bookId, title, author, genre, description, pages, pri
                 console.error('Error editing book:', error);
             });
     };
-    const onEditSubmitHandler = async (e) => {
-        e.preventDefault();
+    const onEditSubmitHandler = async () => {
+        // e.preventDefault();
         await handleEditBook(editFormData);
+        refetchBooks(currentPage)
         // window.location.reload();
     };
 

@@ -64,8 +64,6 @@ const useReviewHook = () => {
 
     const editReview = async (book, rating, text) => {
         try {
-            console.log("booook", book)
-            // console.log("readear", user.reader)
             const response = await axiosInstanceToken.put('/review/update-review', {
                 book: book,
                 rating: rating,
@@ -80,7 +78,7 @@ const useReviewHook = () => {
 
             if (response.status === 200) {
 
-                alert("Successfully added the review!");
+                swal(response.data.message);
                 console.log('Successfully added the review!', response.data);
             } else {
                 alert("Something went wrong.");
@@ -92,11 +90,15 @@ const useReviewHook = () => {
         }
     }
 
+    const fetchReviewApi=()=>{
+        fetchReview()
+    }
+
     useEffect(() => {
         fetchReview()
     }, [])
 
-    return { addReview, fetchedReview, editReview }
+    return { addReview, fetchedReview, editReview, fetchReviewApi }
 }
 
 export default useReviewHook

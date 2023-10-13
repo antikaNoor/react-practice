@@ -1,4 +1,5 @@
 import './pagination.scss'
+import { BiRightArrow, BiLeftArrow } from 'react-icons/bi'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleArrowLeft, faCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -8,8 +9,9 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
     const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1)
     return (
         <div className='page-container'>
-            <FontAwesomeIcon
-                icon={faCircleArrowLeft}
+            <BiLeftArrow
+            style={{fontSize:"24px"}}
+                // icon={faCircleArrowLeft}
                 onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
             />
             {pageNumbers.map((pageNumber) => (
@@ -21,8 +23,9 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
                     {pageNumber}
                 </span>
             ))}
-            <FontAwesomeIcon
-                icon={faCircleArrowRight}
+            <BiRightArrow
+                // icon={faCircleArrowRight}
+                style={{fontSize:"24px"}}
                 onClick={() => currentPage < totalPages && onPageChange(currentPage + 1)}
             />
         </div>
