@@ -12,7 +12,7 @@ function DeleteModal({ deleteBookModal, onDeleteSubmitHandler }) {
                     <i className="fa-solid fa-x" onClick={() => {
                         deleteBookModal();
                     }}></i>
-                    <p>Are you sure about deleting this book?</p>
+                    <p>Are you sure about deleting this User?</p>
                     <div className='btn-container'>
                         <Button value="YES"
                             onClick={onDeleteSubmitHandler} />

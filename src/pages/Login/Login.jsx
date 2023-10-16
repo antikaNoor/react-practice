@@ -95,6 +95,9 @@ function Login() {
                 <div className='text2'>Not registered?
                   <Link className='link' to="/signup">Sign up</Link>
                 </div>
+                <div className='text2'>
+                  <Link className='link' to="/forgot-password">Forgot Password?</Link>
+                </div>
                 <button className='btn' type="submit">Submit</button>
               </div>
             </form>

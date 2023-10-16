@@ -14,6 +14,8 @@ import UserCart from './pages/UserCart/UserCart'
 import AllUserList from "./pages/AllUserList/AllUserList";
 import AllCartsList from "./pages/AllCartsList/AllCartsList";
 import AllTransactionList from "./pages/AllTransactionList/AllTransactionList";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
 
 function App() {
   console.log("this is app")
@@ -25,6 +27,8 @@ function App() {
         <Route path="signup" element={<Signup />} />
         <Route path="view-books-general" element={<BookList />} />
         <Route path="about" element={<About />} />
+        <Route path="forgot-password" element={<ForgotPassword />} />
+        <Route path="reset-password/:token/:userId" element={<ResetPassword />} />
         <Route element={<AdminAuthenticate />}>
           <Route path="login/manage-book" element={<AllBooksList />} />
           <Route path="login/add-book" element={<AddBook />} />
