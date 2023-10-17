@@ -1,14 +1,67 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useBookHook from '../../hooks/useBookHook';
 import Button from '../../components/button/button';
 import './AddBook.scss'
 import { useForm, Controller } from "react-hook-form"
 import Header from '../../components/header/header';
+import { useSearchParams } from "react-router-dom";
+import { axiosInstance } from '../../utils/axiosInstance';
 
 function AddBook() {
 
+    const [file, setFile] = useState(null)
+    const [image, setImage] = useState('images.png')
+    const [isLoading, setIsLoading] = useState(false);
+
     const { handleAddBook } = useBookHook()
+
+    const handleFileChange = (e) => {
+        setFile(e.target.files);
+    };
+
+    const handleFileApi = () => {
+        setIsLoading(true);
+        if (file && file[0]) {
+            const formData = new FormData();
+            formData.append("file_to_upload", file[0]);
+            axiosInstance
+                .post(`book/upload-files`, formData)
+                .then((response) => {
+                    if (response.status !== 200) {
+                        alert("Something went wrong.");
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.data;
+                })
+                .then((data) => {
+                    const fullPath = data?.data;
+
+                    const commonPrefix = 'D:\\MERN_Antika_Noor\\backendForReact\\expressJs-practice-filter-fixed\\server\\';
+                    const fileName = fullPath.replace(commonPrefix, '');
+
+                    console.log('File Name:', fileName);
+                    console.log('image found:', fileName);
+                    setImage(fileName);
+
+                    const formDataWithImage = {
+                        ...getValues(),
+                        image: fileName
+                    };
+
+                    console.log(formDataWithImage)
+                    handleAddBook(formDataWithImage);
+                })
+                .catch((error) => {
+                    console.error('image not found:', error);
+                })
+                .finally(() => {
+                    setIsLoading(false);
+                });
+        } else {
+            console.error('No file selected.');
+        }
+    };
 
     const {
         handleSubmit,
@@ -40,17 +93,21 @@ function AddBook() {
         console.log("The price ", getValues("price"));
         console.log("The stock ", getValues("stock"));
         console.log("The branch ", data.branch);
-        console.log("The image ", getValues("image"));
         handleAddBook(data)
     };
 
-    return (
+    useEffect(() => {
+        if (file && file[0]) {
+            handleFileApi();
+        }
+    }, [file]);
 
+    return (
         <>
             <Header />
             <div className='add-book-container'>
                 <h1 className='add-book-header'>Add a New Book</h1>
-                <form onSubmit={handleSubmit(onSubmitHandler)}>
+                <form onSubmit={handleSubmit(onSubmitHandler)} >
                     <div className='form-container'>
                         <div className='form-items'>
                             <h4>Title</h4>
@@ -249,25 +306,17 @@ function AddBook() {
                         </div>
 
                         <div className='form-items'>
-                            <h4>Image URL</h4>
-                            <Controller
-                                name="image"
-                                control={control}
-                                render={({ field }) => (
-                                    <input
-                                        type="text"
-                                        placeholder="Enter image url"
-                                        {...field}
-                                        style={{ border: errors.image ? "1px solid red" : "" }}
-                                    />
-
-                                )}
+                            <h4>Image</h4>
+                            <input
+                                type="file"
+                                onChange={handleFileChange}
                             />
-                            {errors.image && <h5>{errors.image.message}</h5>}
                         </div>
 
                     </div>
-                    <button className="btn" type="submit">Add</button>
+                    <button className="btn" type="submit" disabled={isLoading}>Add</button>
+
+
                 </form>
             </div>
         </>

@@ -7,12 +7,37 @@ import { useNavigate } from 'react-router-dom'
 import RatingStar from '../../utils/RatingStars'
 import useBookHook from '../../hooks/useBookHook'
 import { useEffect } from 'react'
+import { toast } from 'react-toastify'
 
 const Card = ({ data, updateModal, setRelatedBook }) => {
     const viewButtonValue = "View"
     const navigate = useNavigate()
 
     const { refetchBooks, currentPage } = useBookHook()
+
+    const handleGetFileApi = (image) => {
+        axiosInstance
+            .get(`book/get-file/${image}`)
+            .then((response) => {
+                if (response.status !== 200) {
+                    alert("Something went wrong.")
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.data
+            })
+            .then((data) => {
+                // swal("Book Added Successfully!")
+                console.log('image found:', data);
+            })
+            .catch((error) => {
+                // swal('Error adding book:', error)
+                console.error('image not found:', error);
+            });
+    }
+
+    const handleGetCall = (image) => {
+        handleGetFileApi(image)
+    }
 
     useEffect(() => {
         console.log("fetchedData", data)
@@ -36,7 +61,7 @@ const Card = ({ data, updateModal, setRelatedBook }) => {
                                 return response.data
                             })
                             .then((data) => {
-                                swal("Book Deleted Successfully!")
+                                toast.success("Book Deleted Successfully!")
                                 // navigate('/view-books')
                                 // setUpdate(update => !update);
                                 console.log('Book deleted successfully:', data);
@@ -54,7 +79,7 @@ const Card = ({ data, updateModal, setRelatedBook }) => {
 
                     return <div key={index} className='list-items'>
                         <div className='image-container'>
-                            <img src={book.image}></img>
+                            <img src={`${import.meta.env.VITE_BACKEND_URL}/${book.image}`}></img>
                         </div>
                         <div className='list-details'>
                             <p className='title'><b>{book.title}</b></p>

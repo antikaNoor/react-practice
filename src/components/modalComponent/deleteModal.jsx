@@ -15,7 +15,10 @@ function DeleteModal({ deleteBookModal, onDeleteSubmitHandler }) {
                     <p>Are you sure about deleting this User?</p>
                     <div className='btn-container'>
                         <Button value="YES"
-                            onClick={onDeleteSubmitHandler} />
+                            onClick={() => {
+                                onDeleteSubmitHandler();
+                                deleteBookModal()
+                            }} />
                         <Button value="NO"
                             onClick={deleteBookModal} />
                     </div>

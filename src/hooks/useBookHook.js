@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react'
 import { axiosInstance } from '.././utils/axiosInstance'
 import swal from 'sweetalert'
+import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 // import axios from 'axios'
 
 const useBookHook = () => {
+    const { filepath } = useParams()
     /* FUNCTIONALITY FOR FETCHING ALL BOOKS */
     const [update, setUpdate] = useState(false)
     //fetch data from api
@@ -103,9 +106,10 @@ const useBookHook = () => {
         pages: null,
         price: null,
         stock: null,
-        branch: [],
-        image: ''
+        branch: []
     })
+
+
 
     const handleAddBook = (formData) => {
         // Make a POST request to your API endpoint
@@ -119,11 +123,11 @@ const useBookHook = () => {
                 return response.data
             })
             .then((data) => {
-                swal("Book Added Successfully!")
+                toast.success("Book Added Successfully!")
                 console.log('Book added successfully:', data);
             })
             .catch((error) => {
-                swal('Error adding book:', error)
+                toast.error('Error adding book:', error)
                 console.error('Error adding book:', error);
             });
     };
@@ -136,11 +140,11 @@ const useBookHook = () => {
     }
 
     const refetchBooks = (currentPage) => {
-        const timeOutFunc = setTimeout(() => {
-            console.log("refetch")
-            fetchBooks(currentPage);
-        }, 3000);
-        return () => clearTimeout(timeOutFunc);
+        // const timeOutFunc = setTimeout(() => {
+        console.log("refetch")
+        fetchBooks(currentPage);
+        // }, 3000);
+        // return () => clearTimeout(timeOutFunc);
     };
 
     useEffect(() => {

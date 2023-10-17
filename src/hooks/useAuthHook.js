@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { addUser, logoutUser } from '../redux/Slices/UserSlice';
 import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
+import { toast } from 'react-toastify';
 
 
 const useAuthHook = () => {
@@ -26,6 +27,7 @@ const useAuthHook = () => {
                 if (data.status === false) {
                     navigate("/login/profile");
                 }
+                toast.success("Signed up successfully")
             })
             .catch((error) => {
                 alert('Error signing up:')
@@ -57,7 +59,7 @@ const useAuthHook = () => {
                 }
             })
             .catch((error) => {
-                swal('Authentication failed!')
+                toast.error("Authentication failed")
                 console.error('Error logging in:', error);
             });
     }

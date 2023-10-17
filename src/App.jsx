@@ -16,33 +16,37 @@ import AllCartsList from "./pages/AllCartsList/AllCartsList";
 import AllTransactionList from "./pages/AllTransactionList/AllTransactionList";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   console.log("this is app")
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
-        <Route path="view-books-general" element={<BookList />} />
-        <Route path="about" element={<About />} />
-        <Route path="forgot-password" element={<ForgotPassword />} />
-        <Route path="reset-password/:token/:userId" element={<ResetPassword />} />
-        <Route element={<AdminAuthenticate />}>
-          <Route path="login/manage-book" element={<AllBooksList />} />
-          <Route path="login/add-book" element={<AddBook />} />
-          <Route path="login/manage-user" element={<AllUserList />} />
-          {/* <Route path="login/show-cart" element={<AllCartsList />} /> */}
-          <Route path="login/show-transaction" element={<AllTransactionList />} />
-        </Route>
-        <Route element={<UserAuthenticate />}>
-          <Route path="login/profile" element={<UserProfile />} />
-          <Route path="login/cart" element={<UserCart />} />
-        </Route>
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <ToastContainer />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="view-books-general" element={<BookList />} />
+          <Route path="about" element={<About />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
+          <Route path="reset-password/:token/:userId" element={<ResetPassword />} />
+          <Route element={<AdminAuthenticate />}>
+            <Route path="login/manage-book" element={<AllBooksList />} />
+            <Route path="login/add-book" element={<AddBook />} />
+            <Route path="login/manage-user" element={<AllUserList />} />
+            {/* <Route path="login/show-cart" element={<AllCartsList />} /> */}
+            <Route path="login/show-transaction" element={<AllTransactionList />} />
+          </Route>
+          <Route element={<UserAuthenticate />}>
+            <Route path="login/profile" element={<UserProfile />} />
+            <Route path="login/cart" element={<UserCart />} />
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   )
 }
 
