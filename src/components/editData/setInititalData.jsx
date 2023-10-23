@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import EditData from './editData'
+import EditData from './EditData'
 import { axiosInstance } from '../../utils/axiosInstance'
 import swal from 'sweetalert'
 import useBookHook from '../../hooks/useBookHook'

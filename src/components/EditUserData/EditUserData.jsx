@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import EditUserModal from '../modalComponent/editUserModal';
+import EditUserModal from '../modalComponent/EditUserModal';
 
 function EditUserData({ readerId, reader_name, status, onEditSubmitHandler }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
